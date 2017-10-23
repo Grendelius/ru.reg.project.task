@@ -24,15 +24,13 @@ public class MainYandexPageSteps {
         $(byText("Изменить город")).waitUntil(enabled, 1500).click();
         $(byText("Город")).waitUntil(visible, 1500);
         executeJavaScript("arguments[0].click()", $x("//input[@class='checkbox__control']"));
-        $x("//input[@id='city__front-input']").val(city)
-                .$x("//div[@class='popup__content']")
-                .$$x(".//ul/li//div[@class='b-autocomplete-item__reg']")
-                .forEach(element -> {
-                    if (element.getText().equalsIgnoreCase(city)) {
-                        actions().moveToElement(element).click().build().perform();
-                        $(byText("Сохранить")).submit();
-                    }
-                });
+        $x("//input[@id='city__front-input']").val(city).$x("//div[@class='popup__content']")
+                .$$x(".//ul/li//div[@class='b-autocomplete-item__reg']").forEach(element -> {
+            if (element.getText().equalsIgnoreCase(city)) {
+                actions().moveToElement(element).click().build().perform();
+                $(byText("Сохранить")).submit();
+            }
+        });
     }
 
     public void chooseMarketCategory() {
