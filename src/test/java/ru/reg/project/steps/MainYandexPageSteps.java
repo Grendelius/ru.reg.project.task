@@ -21,11 +21,11 @@ public class MainYandexPageSteps {
 
     public void chooseCity(String city) {
         $(byText("Настройка")).click();
-        $(byText("Изменить город")).waitUntil(enabled, 1500).click();
+        $(byText("Изменить город")).waitUntil(enabled, 1000).click();
         $(byText("Город")).waitUntil(visible, 1500);
         executeJavaScript("arguments[0].click()", $x("//input[@class='checkbox__control']"));
-        $x("//input[@id='city__front-input']").val(city).$x("//div[@class='popup__content']")
-                .$$x(".//ul/li//div[@class='b-autocomplete-item__reg']").forEach(element -> {
+        $x(Xpath.INPUT_COUNTRY_FIELD.getDomString()).val(city).$x(Xpath.COUNTRIES_POPUP.getDomString())
+                .$$x(Xpath.COUNTRIES_FIELDS_POPUP.getDomString()).forEach(element -> {
             if (city.equalsIgnoreCase(element.getText())) {
                 actions().moveToElement(element).click().build().perform();
                 $(byText("Сохранить")).submit();
@@ -46,5 +46,21 @@ public class MainYandexPageSteps {
     public void chooseVideoCategory() {
         $(byText("Видео")).click();
         $x("/html/body/div[4]").waitUntil(enabled, 4000);
+    }
+
+    enum Xpath {
+        INPUT_COUNTRY_FIELD("//input[@id='city__front-input']"),
+        COUNTRIES_POPUP("//div[@class='popup__content']"),
+        COUNTRIES_FIELDS_POPUP(".//ul/li//div[@class='b-autocomplete-item__reg']");
+
+        private String domString;
+
+        Xpath(String s) {
+            this.domString = s;
+        }
+
+        public String getDomString() {
+            return domString;
+        }
     }
 }
