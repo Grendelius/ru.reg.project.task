@@ -9,20 +9,16 @@ import static ru.reg.project.settings.BrowserSettings.setUpFireFox;
 
 public class MainYandexPageSteps {
 
-    //it works
-    public MainYandexPageSteps openYandexSearchPage(final String browserName) {
+    public void openYandexSearchPage(final String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {
             setUpChrome();
         }
         if (browserName.equalsIgnoreCase("firefox")) {
             setUpFireFox();
         }
-
         open("https://www.yandex.ru/");
-        return this;
     }
 
-    //it works !!!!!!!!!!!!!!!!!!!!!!!!
     public void chooseCity(String city) {
         $(byText("Настройка")).click();
         $(byText("Изменить город")).waitUntil(enabled, 1500).click();
@@ -39,20 +35,16 @@ public class MainYandexPageSteps {
                 });
     }
 
-    //it works
-
     public void chooseMarketCategory() {
         $(byText("Маркет")).click();
         $x("/html/body/div[1]").waitUntil(enabled, 4000);
     }
 
-    //it works
     public void chooseMusicCategory() {
         $(byText("Музыка")).click();
         $x("//*[@id='nb-1']/body").waitUntil(enabled, 3000);
     }
 
-    //it works
     public void chooseVideoCategory() {
         $(byText("Видео")).click();
         $x("/html/body/div[4]").waitUntil(enabled, 4000);
