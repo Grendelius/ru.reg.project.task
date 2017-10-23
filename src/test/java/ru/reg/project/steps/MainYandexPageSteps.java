@@ -26,7 +26,7 @@ public class MainYandexPageSteps {
         executeJavaScript("arguments[0].click()", $x("//input[@class='checkbox__control']"));
         $x("//input[@id='city__front-input']").val(city).$x("//div[@class='popup__content']")
                 .$$x(".//ul/li//div[@class='b-autocomplete-item__reg']").forEach(element -> {
-            if (element.getText().equalsIgnoreCase(city)) {
+            if (city.equalsIgnoreCase(element.getText())) {
                 actions().moveToElement(element).click().build().perform();
                 $(byText("Сохранить")).submit();
             }
