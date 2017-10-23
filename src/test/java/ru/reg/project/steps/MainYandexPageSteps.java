@@ -1,7 +1,5 @@
 package ru.reg.project.steps;
 
-import org.openqa.selenium.By;
-
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -24,28 +22,36 @@ public class MainYandexPageSteps {
         return this;
     }
 
-    //it works
+    //it works !!!!!!!!!!!!!!!!!!!!!!!!
     public void chooseCity(String city) {
         $(byText("Настройка")).click();
         $(byText("Изменить город")).waitUntil(enabled, 1500).click();
-        $(byText("Город")).waitUntil(visible,1500);
+        $(byText("Город")).waitUntil(visible, 1500);
         executeJavaScript("arguments[0].click()", $x("//input[@class='checkbox__control']"));
-        $x("//span[@class='input__box']")
-                .setValue(city)
-                .findElement(By.className("popup__content"))
-                .findElements(By.linkText(city)).stream().findFirst().get().click();
+        $x("//input[@id='city__front-input']").val(city)
+                .$x("//div[@class='popup__content']")
+                .$$x(".//ul/li//div[@class='b-autocomplete-item__reg']")
+                .forEach(element -> {
+                    if (element.getText().equalsIgnoreCase(city)) {
+                        actions().moveToElement(element).click().build().perform();
+                        $(byText("Сохранить")).submit();
+                    }
+                });
     }
 
     //it works
+
     public void chooseMarketCategory() {
         $(byText("Маркет")).click();
         $x("/html/body/div[1]").waitUntil(enabled, 4000);
     }
+
     //it works
     public void chooseMusicCategory() {
         $(byText("Музыка")).click();
         $x("//*[@id='nb-1']/body").waitUntil(enabled, 3000);
     }
+
     //it works
     public void chooseVideoCategory() {
         $(byText("Видео")).click();

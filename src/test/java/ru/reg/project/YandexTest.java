@@ -17,7 +17,7 @@ public class YandexTest {
     @Test
     public void cityTest() {
         mainYandexPageSteps.openYandexSearchPage("chrome");
-        mainYandexPageSteps.chooseCity("Москва");
+        mainYandexPageSteps.chooseCity("Баку");
     }
 
 }
