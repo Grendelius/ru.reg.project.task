@@ -9,14 +9,14 @@ import static ru.reg.project.settings.BrowserSettings.setUpFireFox;
 
 public class MainYandexPageSteps {
 
-    public void openYandexSearchPage(final String browserName) {
+    public void openYandexRu(final String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {
             setUpChrome();
         }
         if (browserName.equalsIgnoreCase("firefox")) {
             setUpFireFox();
         }
-        open("https://www.yandex.ru/");
+        open("https://yandex.ru/");
     }
 
     public void chooseCity(String city) {
@@ -24,8 +24,8 @@ public class MainYandexPageSteps {
         $(byText("Изменить город")).waitUntil(enabled, 1000).click();
         $(byText("Город")).waitUntil(visible, 1500);
         executeJavaScript("arguments[0].click()", $x("//input[@class='checkbox__control']"));
-        $x(Xpath.INPUT_COUNTRY_FIELD.getDomString()).val(city).$x(Xpath.COUNTRIES_POPUP.getDomString())
-                .$$x(Xpath.COUNTRIES_FIELDS_POPUP.getDomString()).forEach(element -> {
+        $x(MainPageXpaths.INPUT_COUNTRY_FIELD).val(city).$x(MainPageXpaths.COUNTRIES_POPUP)
+                .$$x(MainPageXpaths.POPUP_COUNTRIES_FIELDS).forEach(element -> {
             if (city.equalsIgnoreCase(element.getText())) {
                 actions().moveToElement(element).click().build().perform();
                 $(byText("Сохранить")).submit();
@@ -36,6 +36,7 @@ public class MainYandexPageSteps {
     public void chooseMarketCategory() {
         $(byText("Маркет")).click();
         $x("/html/body/div[1]").waitUntil(enabled, 4000);
+        switchTo().alert().dismiss();
     }
 
     public void chooseMusicCategory() {
@@ -48,19 +49,11 @@ public class MainYandexPageSteps {
         $x("/html/body/div[4]").waitUntil(enabled, 4000);
     }
 
-    enum Xpath {
-        INPUT_COUNTRY_FIELD("//input[@id='city__front-input']"),
-        COUNTRIES_POPUP("//div[@class='popup__content']"),
-        COUNTRIES_FIELDS_POPUP(".//ul/li//div[@class='b-autocomplete-item__reg']");
+    static class MainPageXpaths {
+        //MainPage elements Xpaths
+        static String INPUT_COUNTRY_FIELD = "//input[@id='city__front-input']";
+        static String COUNTRIES_POPUP = "//div[@class='popup__content']";
+        static String POPUP_COUNTRIES_FIELDS = ".//ul/li//div[@class='b-autocomplete-item__reg']";
 
-        private String domString;
-
-        Xpath(String s) {
-            this.domString = s;
-        }
-
-        public String getDomString() {
-            return domString;
-        }
     }
 }
