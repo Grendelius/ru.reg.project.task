@@ -18,9 +18,12 @@ public class YandexTest {
     }
 
     @Test
-    public void catTest() throws NullPointerException {
-        mainYandexPageSteps.openYandexRu("chrome");
-        mainYandexPageSteps.chooseCity("Энгельс");
+    public void test() throws NullPointerException {
+        (new MainYandexPageSteps())
+                .openYandexRu("chrome")
+                .chooseCity("Энгельс")
+                .chooseMarketCategory();
+
     }
 
 }
