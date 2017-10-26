@@ -14,16 +14,17 @@ public class YandexTest {
     @Before
     public void init() throws Exception {
         mainYandexPageSteps = new MainYandexPageSteps();
-        yandexMarketSteps = new YandexMarketSteps();
     }
 
     @Test
-    public void test() throws NullPointerException {
-        (new MainYandexPageSteps())
+    public void test() {
+        mainYandexPageSteps
                 .openYandexRu("chrome")
-                .chooseCity("Энгельс")
-                .chooseMarketCategory();
-
+                .chooseMarketCategory()
+                .selectProductsCategory("электроника")
+                .selectProductsSubCategory("мобильные телефоны")
+                .goToAdvancedSearch()
+                .chooseSearchParametr("оптическая стабилизация", true);
     }
 
 }

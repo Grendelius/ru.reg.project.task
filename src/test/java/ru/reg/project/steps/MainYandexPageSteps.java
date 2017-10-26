@@ -1,5 +1,7 @@
 package ru.reg.project.steps;
 
+import org.openqa.selenium.NoSuchElementException;
+
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -16,25 +18,35 @@ public class MainYandexPageSteps {
         return this;
     }
 
-    public MainYandexPageSteps chooseCity(String city) {
+    public MainYandexPageSteps chooseCity(String city) throws NoSuchElementException {
         $(byText("Настройка")).click();
         $(byText("Изменить город")).waitUntil(enabled, 1000).click();
         $(byText("Город")).waitUntil(visible, 1500);
         executeJavaScript("arguments[0].click()", $x("//input[@class='checkbox__control']"));
-        $x(MainPageXpaths.INPUT_COUNTRY_FIELD).val(city).$x(MainPageXpaths.COUNTRIES_POPUP)
-                .$$x(MainPageXpaths.POPUP_COUNTRIES_FIELDS).forEach(element -> {
-            if (city.equalsIgnoreCase(element.getText())) {
-                actions().moveToElement(element).click().build().perform();
-                $(byText("Сохранить")).submit();
-            }
-        });
+        $x(MainPageXpaths.INPUT_COUNTRY_FIELD).val(city);
+        try {
+            $x(MainPageXpaths.COUNTRIES_POPUP).$$x(MainPageXpaths.POPUP_COUNTRIES_FIELDS).forEach(element -> {
+                if (city.equalsIgnoreCase(element.getText())) {
+                    actions().moveToElement(element).click().build().perform();
+                    $(byText("Сохранить")).submit();
+                }
+            });
+        } catch (NoSuchElementException exc) {
+            System.out.println("Popup element not found! City has been determined automatically");
+            screenshot("popup_not_found");
+            refresh();
+            $(byText("Сохранить")).submit();
+        }
         return this;
     }
 
     public YandexMarketSteps chooseMarketCategory() {
         $(byText("Маркет")).click();
-        $x("/html/body/div[1]").waitUntil(enabled, 4000);
-        switchTo().alert().dismiss();
+        try {
+            $x("/html/body/div[1]").waitUntil(enabled, 4000);
+        } catch (NoSuchElementException | NullPointerException exc) {
+            screenshot("element nor found/null");
+        }
         return (new YandexMarketSteps());
     }
 
