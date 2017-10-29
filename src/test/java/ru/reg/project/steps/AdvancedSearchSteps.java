@@ -30,27 +30,28 @@ public class AdvancedSearchSteps extends AbstractSteps {
     public AdvancedSearchSteps setUpPrice(Integer from, Integer to) {
         if (from == null) $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
         if (to == null) $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
-//        if (from != null && to != null) {
-//            $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
-//            $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
-//        }
+        if (from != null && to != null) {
+            $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
+            $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
+        }
         return this;
     }
 
     public AdvancedSearchSteps setUpPhoneScreenDiagonal(String size) throws NoSuchElementException {
-        searchParametrBlock("Диагональ экрана").click();
         try {
-            $$x("//label[@class='checkbox__label']").forEach(element -> {
+            searchParametrBlock("Диагональ экрана").click();
+            $$x(".//label[@class='checkbox__label']").forEach(element -> {
                 for (String p : screenSizeValues)
                     if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
-                        element.click();
+                        zoom(1.5);
+                        actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
                     }
             });
         } catch (NoSuchElementException exc) {
             $$x("//span[@class='n-filter-enum-sorted__value']").forEach(element -> {
                 for (String p : screenSizeValues) {
                     if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
-                        element.click();
+                        actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
                     }
                 }
             });
@@ -61,7 +62,11 @@ public class AdvancedSearchSteps extends AbstractSteps {
     public AdvancedSearchSteps setUpPhoneScreenDiagonalPrecisely(Float from, Float to) {
         searchParametrBlock("Диагональ экрана (точно), \"").click();
         if (from == null) $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
-        if (to == null) $("glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
+        if (to == null) $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
+        if (from != null && to != null) {
+            $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
+            $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
+        }
         return this;
     }
 

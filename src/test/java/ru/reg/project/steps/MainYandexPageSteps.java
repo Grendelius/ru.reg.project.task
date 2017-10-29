@@ -32,7 +32,6 @@ public class MainYandexPageSteps {
                 }
             });
         } catch (NoSuchElementException exc) {
-            System.out.println("Popup element not found! City has been determined automatically");
             screenshot("popup_not_found");
             refresh();
             $(byText("Сохранить")).submit();

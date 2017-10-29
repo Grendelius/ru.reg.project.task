@@ -9,19 +9,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class YandexTest {
     private MainYandexPageSteps mainYandexPageSteps;
     private YandexMarketSteps yandexMarketSteps;
-    public List<String> makers = new ArrayList<>(Arrays.asList(
+    private List<String> makers = new ArrayList<>(Arrays.asList(
             "Apple", "Samsung", "LG", "OnePlus", "Motorola"));
 
 
     @Before
-    public void init() throws Exception {
+    public void init() throws Throwable {
         mainYandexPageSteps = new MainYandexPageSteps();
         yandexMarketSteps = new YandexMarketSteps();
-
     }
 
     @Test
@@ -32,8 +30,8 @@ public class YandexTest {
                 .selectProductsCategory("электроника")
                 .selectProductsSubCategory("мобильные телефоны")
                 .goToAdvancedSearch()
-                .setUpPrice(null, 20000)
-                .setUpPhoneScreenDiagonalPrecisely(null, 3f)
+                .setUpPrice(10000, 20000)
+                .setUpPhoneScreenDiagonalPrecisely(1f, 3f)
                 .chooseMakers(makers)
                 .clickAccept()
                 .assertSize(12);
