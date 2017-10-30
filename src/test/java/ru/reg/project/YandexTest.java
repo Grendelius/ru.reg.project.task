@@ -2,6 +2,7 @@ package ru.reg.project;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.testng.annotations.DataProvider;
 import ru.reg.project.pages.MainPage;
 import ru.reg.project.pages.MarketPage;
 
@@ -12,8 +13,15 @@ import java.util.List;
 public class YandexTest {
     private MainPage mainPage;
     private MarketPage marketPage;
-    private List<String> makers = new ArrayList<>(Arrays.asList(
-            "Apple", "Samsung", "LG", "OnePlus", "Motorola"));
+
+
+    @DataProvider(name = "TestData")
+    public Object[][] makers() {
+        return new Object[][]{
+                {new ArrayList<>(Arrays.asList(
+                        "Apple", "Samsung", "LG", "OnePlus", "Motorola"))},
+        };
+    }
 
 
     @Before
@@ -23,7 +31,7 @@ public class YandexTest {
     }
 
     @Test
-    public void test() {
+    public void test(List<String> makers) {
         mainPage.openYandexRu("chrome")
                 .chooseMarketCategory()
                 .selectProductsCategory("электроника")
