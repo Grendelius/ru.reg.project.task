@@ -1,7 +1,8 @@
-package ru.reg.project.steps;
+package ru.reg.project.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.reg.project.steps.AbstractSteps;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -14,20 +15,37 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
-public class AdvancedSearchSteps extends AbstractSteps {
-    private List<String> screenSizeValues = new ArrayList<>(Arrays.asList("до 2\"", "2.1\"-2.9\"", "3\"-4\""));
-    private SelenideElement divBlock;
+public class AdvancedSearchPage implements AbstractSteps {
+    private SelenideElement parameter;
 
-    public void pullOutSearchParametr(String pName) {
-        ElementsCollection pBlocks = $$x("//h4[@class='title']");
-        pBlocks.forEach(element -> {
-            if (pName.equalsIgnoreCase(element.getText())) {
-                element.setSelected(true);
+    @Override
+    public SelenideElement searchParameterBlock(String name) {
+        $$x("//span[@class='title__content']").forEach(element -> {
+            if (name.equalsIgnoreCase(element.getText())) {
+                parameter = element;
             }
         });
+        return parameter;
     }
 
-    public AdvancedSearchSteps setUpPrice(Integer from, Integer to) {
+    @Override
+    public void clickOnCheckbox(String pName) throws NoSuchElementException {
+        try {
+            $$x("//label[@class='checkbox__label']").forEach(element -> {
+                if (pName.contentEquals((element.getText()))) {
+                    executeJavaScript("arguments[1].click()", element);
+                }
+            });
+        } catch (NoSuchElementException exc) {
+            $$x("//span[@class='n-filter-enum-sorted__value']").forEach(element -> {
+                if (pName.contentEquals(element.getText())) {
+                    actions().moveToElement(element).click().build().perform();
+                }
+            });
+        }
+    }
+
+    public AdvancedSearchPage setUpPrice(Integer from, Integer to) {
         if (from == null) $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
         if (to == null) $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
         if (from != null && to != null) {
@@ -37,11 +55,12 @@ public class AdvancedSearchSteps extends AbstractSteps {
         return this;
     }
 
-    public AdvancedSearchSteps setUpPhoneScreenDiagonal(String size) throws NoSuchElementException {
+    public AdvancedSearchPage setUpPhoneScreenDiagonal(String size) throws NoSuchElementException {
+        List<String> sizesList = new ArrayList<>(Arrays.asList("до 2\"", "2.1\"-2.9\"", "3\"-4\""));
         try {
-            searchParametrBlock("Диагональ экрана").click();
+            searchParameterBlock("Диагональ экрана").click();
             $$x(".//label[@class='checkbox__label']").forEach(element -> {
-                for (String p : screenSizeValues)
+                for (String p : sizesList)
                     if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
                         zoom(1.5);
                         actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
@@ -49,7 +68,7 @@ public class AdvancedSearchSteps extends AbstractSteps {
             });
         } catch (NoSuchElementException exc) {
             $$x("//span[@class='n-filter-enum-sorted__value']").forEach(element -> {
-                for (String p : screenSizeValues) {
+                for (String p : sizesList) {
                     if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
                         actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
                     }
@@ -59,8 +78,8 @@ public class AdvancedSearchSteps extends AbstractSteps {
         return this;
     }
 
-    public AdvancedSearchSteps setUpPhoneScreenDiagonalPrecisely(Float from, Float to) {
-        searchParametrBlock("Диагональ экрана (точно), \"").click();
+    public AdvancedSearchPage setUpPhoneScreenDiagonalPrecisely(Float from, Float to) {
+        searchParameterBlock("Диагональ экрана (точно), \"").click();
         if (from == null) $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
         if (to == null) $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
         if (from != null && to != null) {
@@ -70,13 +89,13 @@ public class AdvancedSearchSteps extends AbstractSteps {
         return this;
     }
 
-    public AdvancedSearchSteps setUpOnSaleCheckBox(boolean click) {
+    public AdvancedSearchPage setUpOnSaleCheckBox(boolean click) {
         SelenideElement checkbox = $(byText("В продаже")).shouldBe(enabled);
         executeJavaScript(click ? "arguments[1].click()" : "arguments[0].click()", $(checkbox));
         return this;
     }
 
-    public AdvancedSearchSteps chooseMakers(List<String> makers) {
+    public AdvancedSearchPage chooseMakers(List<String> makers) {
         SelenideElement parentDiv = $x("/html/body/div[1]/div[4]/div/div[1]/div[1]/div[2]");
         parentDiv.find(byXpath(".//button")).click();
         SelenideElement inputfield = parentDiv.find(byXpath(".//input[@class='input__control']"));
@@ -94,9 +113,9 @@ public class AdvancedSearchSteps extends AbstractSteps {
         return this;
     }
 
-    public YandexMarketSteps clickAccept() {
+    public MarketPage clickAccept() {
         $x("/html/body/div[1]/div[4]/div/div[1]/div[5]/a[2]/span").click();
-        return (new YandexMarketSteps());
+        return (new MarketPage());
     }
 
 

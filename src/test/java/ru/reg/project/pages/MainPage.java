@@ -1,4 +1,4 @@
-package ru.reg.project.steps;
+package ru.reg.project.pages;
 
 import org.openqa.selenium.NoSuchElementException;
 
@@ -9,16 +9,16 @@ import static com.codeborne.selenide.Selenide.*;
 import static ru.reg.project.settings.BrowserSettings.setUpChrome;
 import static ru.reg.project.settings.BrowserSettings.setUpFireFox;
 
-public class MainYandexPageSteps {
+public class MainPage {
 
-    public MainYandexPageSteps openYandexRu(final String browserName) {
+    public MainPage openYandexRu(final String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) setUpChrome();
         if (browserName.equalsIgnoreCase("firefox")) setUpFireFox();
         open("https://yandex.ru/");
-        return (new MainYandexPageSteps());
+        return (new MainPage());
     }
 
-    public MainYandexPageSteps chooseCity(String city) throws NoSuchElementException {
+    public MainPage chooseCity(String city) throws NoSuchElementException {
         $(byText("Настройка")).click();
         $(byText("Изменить город")).waitUntil(enabled, 1000).click();
         $(byText("Город")).waitUntil(visible, 1500);
@@ -39,10 +39,10 @@ public class MainYandexPageSteps {
         return this;
     }
 
-    public YandexMarketSteps chooseMarketCategory() {
+    public MarketPage chooseMarketCategory() {
         $(byText("Маркет")).click();
         sleep(2000);
-        return (new YandexMarketSteps());
+        return (new MarketPage());
     }
 
     public void chooseMusicCategory() {

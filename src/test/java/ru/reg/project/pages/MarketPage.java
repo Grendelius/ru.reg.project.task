@@ -1,4 +1,4 @@
-package ru.reg.project.steps;
+package ru.reg.project.pages;
 
 // TODO: 1 переход в Расширенный поиск, параметры поиска(1 have) и изменение параметров фильтрации
 // TODO: 2 реализовать класс абстрактной корневой страницы(категориальной) маркета с выгрузкой блоков товара в коллекцию
@@ -12,12 +12,10 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class YandexMarketSteps extends AdvancedSearchSteps {
-
+public class MarketPage extends AdvancedSearchPage {
     private SelenideElement product;
-    private List<SelenideElement> productsBlock;
 
-    public SelenideElement getOneProduct() {
+    public SelenideElement getProduct() {
         return product;
     }
 
@@ -29,17 +27,16 @@ public class YandexMarketSteps extends AdvancedSearchSteps {
                 $$x("/html/body/div[1]/div[4]/div[2]/div[1]/div[2]/div/div[3]/div/a");
         upBlck.stream().forEachOrdered(element -> list.add(element));
         bottomBlck.stream().forEachOrdered(element -> list.add(element));
-        this.productsBlock = list;
-        return productsBlock;
+        return list;
     }
 
-    public YandexMarketSteps searchFirstProduct() {
+    public MarketPage getFirstProduct() {
         SelenideElement element = getProductBlocks().stream().findFirst().get();
         product = element;
         return this;
     }
 
-    public YandexMarketSteps sortClick(String sortName) {
+    public MarketPage sortClick(String sortName) {
         $$x("/html/body/div[1]/div[4]/div[1]/div[2]/div[1]/div[1]/div/a").forEach(element -> {
             if (sortName.equalsIgnoreCase(element.getText())) {
                 actions().moveToElement(element).click().build().perform();
@@ -52,17 +49,15 @@ public class YandexMarketSteps extends AdvancedSearchSteps {
         $(product).click();
         $x("/html/body/div[1]/div[4]/div[2]/div[2]/div/div[1]/div[1]/h1")
                 .waitUntil(visible, 3000);
-
     }
 
-    public void raitingShow() {
+    public void ratingShow() {
         SelenideElement raiting = $x("//div[@class='rating__value'][1]");
         SelenideElement productName = $x("//h1[@class='title title_size_28 title_bold_yes']");
         System.out.println("Raiting value of " + (productName.getText()) + " is: " + (raiting.getText()));
     }
 
-    public YandexMarketSteps selectProductsCategory(String category) throws NoSuchElementException {
-        /* //html/body/div[4]/div[1]/div */
+    public MarketPage selectProductsCategory(String category) throws NoSuchElementException {
         try {
             $$x(MarketPageXpaths.categoryDom).forEach(element -> {
                 if (category.equalsIgnoreCase(element.getText())) {
@@ -84,7 +79,7 @@ public class YandexMarketSteps extends AdvancedSearchSteps {
         return this;
     }
 
-    public YandexMarketSteps selectProductsSubCategory(String subcategory) throws NoSuchElementException {
+    public MarketPage selectProductsSubCategory(String subcategory) throws NoSuchElementException {
         /* /html/body/div[4]/div[1]/div[7]/div/div/div[2]/div[1]/div/a */
         try {
             $$x(MarketPageXpaths.subCategoryDom).stream().forEach(element -> {
@@ -104,10 +99,10 @@ public class YandexMarketSteps extends AdvancedSearchSteps {
         return this;
     }
 
-    public AdvancedSearchSteps goToAdvancedSearch() {
+    public AdvancedSearchPage goToAdvancedSearch() {
         $x("//div[@class='n-filter-panel-aside__show-more']/a").shouldBe(visible).click();
         $x("//body/div[1]/div[3]/div/h1").shouldBe(visible).shouldHave(exactText("Все фильтры"));
-        return (new AdvancedSearchSteps());
+        return (new AdvancedSearchPage());
     }
 
     public boolean assertSize(int size) {
