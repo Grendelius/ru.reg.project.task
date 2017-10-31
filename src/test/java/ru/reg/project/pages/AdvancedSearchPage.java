@@ -64,6 +64,7 @@ public class AdvancedSearchPage implements AbstractSteps {
                     if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
                         zoom(1.5);
                         actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
+                        break;
                     }
             });
         } catch (NoSuchElementException exc) {
@@ -71,6 +72,7 @@ public class AdvancedSearchPage implements AbstractSteps {
                 for (String p : sizesList) {
                     if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
                         actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
+                        break;
                     }
                 }
             });
@@ -81,8 +83,11 @@ public class AdvancedSearchPage implements AbstractSteps {
     public AdvancedSearchPage setUpPhoneScreenDiagonalPrecisely(Float from, Float to) {
         searchParameterBlock("Диагональ экрана (точно), \"").click();
         if (from == null) $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
+        zoom(1);
         if (to == null) $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
+        zoom(1);
         if (from != null && to != null) {
+            zoom(1);
             $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
             $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
         }
@@ -102,7 +107,7 @@ public class AdvancedSearchPage implements AbstractSteps {
         ElementsCollection checkboxes = parentDiv.findAll(byXpath(".//input[@class='checkbox__control']"));
         checkboxes.forEach(element -> {
             for (String s : makers) {
-                zoom(2);
+                zoom(1.5);
                 inputfield.val(s);
                 actions().pause(Duration.ofSeconds(2)).build().perform();
                 if (element.isEnabled()) {
@@ -113,7 +118,7 @@ public class AdvancedSearchPage implements AbstractSteps {
         return this;
     }
 
-    public MarketPage clickAccept() {
+    public MarketPage clickToAccept() {
         $x("/html/body/div[1]/div[4]/div/div[1]/div[5]/a[2]/span").click();
         return (new MarketPage());
     }

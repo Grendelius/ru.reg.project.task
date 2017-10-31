@@ -33,6 +33,7 @@ public class MarketPage extends AdvancedSearchPage {
     public MarketPage getFirstProduct() {
         SelenideElement element = getProductBlocks().stream().findFirst().get();
         product = element;
+        System.out.println($(product).getAttribute("title"));
         return this;
     }
 
@@ -54,7 +55,7 @@ public class MarketPage extends AdvancedSearchPage {
     public void ratingShow() {
         SelenideElement raiting = $x("//div[@class='rating__value'][1]");
         SelenideElement productName = $x("//h1[@class='title title_size_28 title_bold_yes']");
-        System.out.println("Raiting value of " + (productName.getText()) + " is: " + (raiting.getText()));
+        System.out.println("Rating value of " + (productName.getText()) + " is: " + (raiting.getText()));
     }
 
     public MarketPage selectProductsCategory(String category) throws NoSuchElementException {
@@ -64,8 +65,8 @@ public class MarketPage extends AdvancedSearchPage {
                     actions().moveToElement(element).click().build().perform();
                 }
             });
-//        $x("//div//h1")
-//                .waitUntil(visible, 10000).shouldHave(exactText(category));
+            $x("//div//h1")
+                    .waitUntil(visible, 10000).shouldHave(exactText(category));
         } catch (NoSuchElementException exc) {
             SelenideElement el = $x(MarketPageXpaths.ALL_CAT_BTN);
             el.waitUntil(enabled, 3000);
@@ -80,15 +81,14 @@ public class MarketPage extends AdvancedSearchPage {
     }
 
     public MarketPage selectProductsSubCategory(String subcategory) throws NoSuchElementException {
-        /* /html/body/div[4]/div[1]/div[7]/div/div/div[2]/div[1]/div/a */
         try {
             $$x(MarketPageXpaths.subCategoryDom).stream().forEach(element -> {
                 if (subcategory.equalsIgnoreCase(element.getText())) {
                     actions().moveToElement(element).click().build().perform();
                 }
             });
-//        $x("//div//h1")
-//                .waitUntil(visible, 3000).shouldHave(exactText(subcategory));
+            $x("//div//h1")
+                    .waitUntil(visible, 3000).shouldHave(exactText(subcategory));
         } catch (java.util.NoSuchElementException exc) {
             $$x(MarketPageXpaths.SUB_CAT_FIELD).stream().forEach(element -> {
                 if (subcategory.equalsIgnoreCase(element.getText())) {
