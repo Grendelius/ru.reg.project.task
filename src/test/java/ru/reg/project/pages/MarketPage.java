@@ -1,8 +1,5 @@
 package ru.reg.project.pages;
 
-// TODO: 1 переход в Расширенный поиск, параметры поиска(1 have) и изменение параметров фильтрации
-// TODO: 2 реализовать класс абстрактной корневой страницы(категориальной) маркета с выгрузкой блоков товара в коллекцию
-
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.NoSuchElementException;
 
