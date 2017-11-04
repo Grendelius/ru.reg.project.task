@@ -24,7 +24,7 @@ public class YandexTest {
     }
 
     @BeforeTest
-    public void init() throws Throwable {
+    public void init() {
         mainPage = new MainPage();
         marketPage = new MarketPage();
     }
@@ -38,17 +38,14 @@ public class YandexTest {
                 .selectProductsSubCategory("мобильные телефоны")
                 .goToAdvancedSearch()
                 .setUpPrice(null, 20000)
-                .setUpPhoneScreenDiagonalPrecisely(null, 3f)
+                .setUpPhoneScreenDiagonalPrecisely(3f, null)
                 .chooseMakers(makers)
                 .clickToAccept()
                 .assertSize(12);
         marketPage
                 .getFirstProduct()
                 .sortClick("по новизне")
-                .getAndClickOnProduct();
-        marketPage
+                .getAndClickOnProduct()
                 .ratingShow();
-
     }
-
 }

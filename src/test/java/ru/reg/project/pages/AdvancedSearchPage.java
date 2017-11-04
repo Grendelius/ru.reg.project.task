@@ -2,7 +2,6 @@ package ru.reg.project.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.reg.project.steps.AbstractSteps;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -11,43 +10,37 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
-public class AdvancedSearchPage implements AbstractSteps {
+public class AdvancedSearchPage {
     private SelenideElement parameter;
 
-    @Override
-    public SelenideElement searchParameterBlock(String name) {
-        $$x("//span[@class='title__content']").forEach(element -> {
-            if (name.equalsIgnoreCase(element.getText())) {
-                parameter = element;
-            }
-        });
+    private SelenideElement searchParameterBlock(String name) {
+        parameter = $$x("//span[@class='title__content']").filter(exactText(name)).first();
         return parameter;
     }
 
-    @Override
-    public void clickOnCheckbox(String pName) throws NoSuchElementException {
+    private void clickOnCheckbox(String pName) throws NoSuchElementException {
         try {
-            $$x("//label[@class='checkbox__label']").forEach(element -> {
-                if (pName.contentEquals((element.getText()))) {
-                    executeJavaScript("arguments[1].click()", element);
-                }
-            });
+            SelenideElement checkbox = $$x("//label[@class='checkbox__label']").filter(exactText(pName)).first();
+            executeJavaScript("arguments[1].click()", checkbox);
         } catch (NoSuchElementException exc) {
-            $$x("//span[@class='n-filter-enum-sorted__value']").forEach(element -> {
-                if (pName.contentEquals(element.getText())) {
-                    actions().moveToElement(element).click().build().perform();
-                }
-            });
+            SelenideElement checkbox =
+                    $$x("//span[@class='n-filter-enum-sorted__value']").filter(exactText(pName)).first();
+            actions().moveToElement(checkbox).click().build().perform();
         }
     }
 
     public AdvancedSearchPage setUpPrice(Integer from, Integer to) {
-        if (from == null) $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
-        if (to == null) $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
+        if (from == null) {
+            $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
+        }
+        if (to == null) {
+            $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
+        }
         if (from != null && to != null) {
             $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
             $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
@@ -71,6 +64,7 @@ public class AdvancedSearchPage implements AbstractSteps {
             $$x("//span[@class='n-filter-enum-sorted__value']").forEach(element -> {
                 for (String p : sizesList) {
                     if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
+                        zoom(1.5);
                         actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
                         break;
                     }
@@ -82,10 +76,14 @@ public class AdvancedSearchPage implements AbstractSteps {
 
     public AdvancedSearchPage setUpPhoneScreenDiagonalPrecisely(Float from, Float to) {
         searchParameterBlock("Диагональ экрана (точно), \"").click();
-        if (from == null) $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
-        zoom(1);
-        if (to == null) $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
-        zoom(1);
+        if (from == null) {
+            $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
+            zoom(1);
+        }
+        if (to == null) {
+            $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
+            zoom(1);
+        }
         if (from != null && to != null) {
             zoom(1);
             $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));

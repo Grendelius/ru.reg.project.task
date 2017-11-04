@@ -23,9 +23,10 @@ public class MainPage {
         $(byText("Изменить город")).waitUntil(enabled, 1000).click();
         $(byText("Город")).waitUntil(visible, 1500);
         executeJavaScript("arguments[0].click()", $x("//input[@class='checkbox__control']"));
-        $x(MainPageXpaths.INPUT_COUNTRY_FIELD).setValue(city);
+        $x(MainPageXpaths.input_country_field).shouldBe(enabled).val(city)
+                .$x(MainPageXpaths.countries_popup).shouldBe(enabled);
         try {
-            $x(MainPageXpaths.COUNTRIES_POPUP).$$x(MainPageXpaths.POPUP_COUNTRIES_FIELDS).forEach(element -> {
+            $x(MainPageXpaths.countries_popup).$$x(MainPageXpaths.popup_countries_field).forEach(element -> {
                 if (city.contentEquals(element.getText())) {
                     actions().moveToElement(element).click().build().perform();
                     $(byText("Сохранить")).submit();
@@ -33,7 +34,6 @@ public class MainPage {
             });
         } catch (NoSuchElementException exc) {
             screenshot("popup_not_found");
-            refresh();
             $(byText("Сохранить")).submit();
         }
         return this;
@@ -59,9 +59,9 @@ public class MainPage {
 
     static class MainPageXpaths {
         //Elements xpath on the MainPage
-        static String INPUT_COUNTRY_FIELD = "//input[@id='city__front-input']";
-        static String COUNTRIES_POPUP = "//div[@class='popup__content']";
-        static String POPUP_COUNTRIES_FIELDS = ".//ul/li//div[@class='b-autocomplete-item__reg']";
+        static String input_country_field = "//input[@id='city__front-input']";
+        static String countries_popup = "//div[@class='popup__content']";
+        static String popup_countries_field = ".//ul/li//div[@class='b-autocomplete-item__reg']";
 
     }
 }
