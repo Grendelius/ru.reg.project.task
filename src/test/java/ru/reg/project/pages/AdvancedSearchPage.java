@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
-public class AdvancedSearchPage {
+public class AdvancedSearchPage implements AbstractPage {
     private SelenideElement parameter;
 
     private SelenideElement searchParameterBlock(String name) {
@@ -23,7 +23,9 @@ public class AdvancedSearchPage {
         return parameter;
     }
 
-    private void clickOnCheckbox(String pName) throws NoSuchElementException {
+
+    @Override
+    public void clickOnCheckbox(String pName) throws NoSuchElementException {
         try {
             SelenideElement checkbox = $$x("//label[@class='checkbox__label']").filter(exactText(pName)).first();
             executeJavaScript("arguments[1].click()", checkbox);

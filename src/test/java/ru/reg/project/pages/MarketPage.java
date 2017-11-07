@@ -90,5 +90,4 @@ public class MarketPage extends AdvancedSearchPage {
         static String categoryDom = ("//a[@class='link topmenu__link']");
         static String subCategoryDom = ("//div[@class='catalog-menu__list']/a");
     }
-
 }
