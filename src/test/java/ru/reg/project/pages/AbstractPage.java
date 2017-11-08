@@ -1,6 +1,6 @@
 package ru.reg.project.pages;
 
-public interface AbstractPage {
+abstract class AbstractPage {
 
-    void clickOnCheckbox(String name);
+    abstract void clickOnCheckbox(String name);
 }

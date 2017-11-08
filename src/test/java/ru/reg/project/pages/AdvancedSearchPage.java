@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
-public class AdvancedSearchPage implements AbstractPage {
+public class AdvancedSearchPage extends AbstractPage {
     private SelenideElement parameter;
 
     private SelenideElement searchParameterBlock(String name) {
