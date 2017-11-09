@@ -12,8 +12,9 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class MarketPage extends AdvancedSearchPage {
+public class MarketPage {
     private SelenideElement product;
+    private AdvancedSearchPage advancedSearchPageSteps;
 
     private SelenideElement getProduct() {
         return product;
@@ -76,10 +77,20 @@ public class MarketPage extends AdvancedSearchPage {
         return this;
     }
 
+    public void setPrice(Integer from, Integer to) {
+        advancedSearchPageSteps = new AdvancedSearchPage();
+        advancedSearchPageSteps.setUpPrice(from, to);
+    }
+
+    public void setScreenDiagonal(String size) {
+        advancedSearchPageSteps = new AdvancedSearchPage();
+        advancedSearchPageSteps.setUpPhoneScreenDiagonal(size);
+    }
+
     public AdvancedSearchPage goToAdvancedSearch() {
         $x("//div[@class='n-filter-panel-aside__show-more']/a").shouldBe(visible).click();
         $x("//body/div[1]/div[3]/div/h1").shouldBe(visible).shouldHave(exactText("Все фильтры"));
-        return (new AdvancedSearchPage());
+        return advancedSearchPageSteps = new AdvancedSearchPage();
     }
 
     public void assertSize(int size) {

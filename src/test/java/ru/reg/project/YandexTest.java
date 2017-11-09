@@ -36,7 +36,7 @@ public class YandexTest {
                 .chooseMarketCategory()
                 .selectProductsCategory("электроника")
                 .selectProductsSubCategory("мобильные телефоны")
-                .goToAdvancedSearch()
+                .goToAdvancedSearch() //Initialized new AdvancedSearchPage
                 .setUpPrice(null, 20000)
                 .setUpPhoneScreenDiagonalPrecisely(3f, null)
                 .chooseMakers(makers)

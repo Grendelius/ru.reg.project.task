@@ -4,7 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class ProductPage extends MarketPage {
+public class ProductPage {
+    private MarketPage marketPageSteps;
 
     public void ratingShow() {
         SelenideElement raiting = $x("//div[@class='rating__value'][1]");
