@@ -15,8 +15,12 @@ import static com.codeborne.selenide.Selenide.*;
 public class MarketPage extends AdvancedSearchPage {
     private SelenideElement product;
 
-    public SelenideElement getProduct() {
+    private SelenideElement getProduct() {
         return product;
+    }
+
+    private void setProduct(SelenideElement product) {
+        this.product = product;
     }
 
     private List<SelenideElement> getProductBlocks() {
@@ -29,8 +33,8 @@ public class MarketPage extends AdvancedSearchPage {
     }
 
     public MarketPage getFirstProduct() {
-        product = getProductBlocks().get(1);
-        System.out.println($(product).getAttribute("title"));
+        setProduct(getProductBlocks().get(1));
+        System.out.println(getProduct().getAttribute("title"));
         return this;
     }
 

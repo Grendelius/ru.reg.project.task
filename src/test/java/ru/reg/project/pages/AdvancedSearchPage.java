@@ -18,9 +18,17 @@ import static com.codeborne.selenide.Selenide.*;
 public class AdvancedSearchPage extends AbstractPage {
     private SelenideElement parameter;
 
-    private SelenideElement searchParameterBlock(String name) {
-        parameter = $$x("//span[@class='title__content']").filter(exactText(name)).first();
+    private SelenideElement getParameter() {
         return parameter;
+    }
+
+    private void setParameter(SelenideElement parameter) {
+        this.parameter = parameter;
+    }
+
+    private SelenideElement searchParameterBlock(String name) {
+        setParameter($$x("//span[@class='title__content']").filter(exactText(name)).first());
+        return getParameter();
     }
 
     @Override

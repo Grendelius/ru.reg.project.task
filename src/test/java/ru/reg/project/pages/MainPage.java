@@ -11,10 +11,7 @@ import static ru.reg.project.settings.BrowserSettings.setUpFireFox;
 
 public class MainPage extends AbstractPage {
 
-    private String browserName;
-
     public MainPage openYandexRu(final String browserName) {
-        this.browserName = browserName;
         if (browserName.equalsIgnoreCase("chrome")) setUpChrome();
         if (browserName.equalsIgnoreCase("firefox")) setUpFireFox();
         open("https://yandex.ru/");
@@ -59,13 +56,13 @@ public class MainPage extends AbstractPage {
     public void chooseMusicCategory() {
         waitUntilEnabledByText("Музыка").click();
         $x("//*[@id='nb-1']/body").waitUntil(enabled, 3000);
-//        return (new YandexMusicSteps());
+//        return (new YandexMusicPage());
     }
 
     public void chooseVideoCategory() {
         waitUntilEnabledByText("Видео").click();
         $x("/html/body/div[4]").waitUntil(enabled, 4000);
-//        return (new VideoYandexSteps());
+//        return (new VideoYandexPage());
     }
 
     static class MainPageXpaths {
