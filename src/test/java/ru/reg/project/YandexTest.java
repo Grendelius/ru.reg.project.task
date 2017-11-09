@@ -1,8 +1,10 @@
 package ru.reg.project;
 
 
+import com.codeborne.selenide.testng.TextReport;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.reg.project.pages.MainPage;
 import ru.reg.project.pages.MarketPage;
@@ -10,6 +12,8 @@ import ru.reg.project.pages.MarketPage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+@Listeners(TextReport.class)
 
 public class YandexTest {
     private MainPage mainPage;
@@ -24,13 +28,13 @@ public class YandexTest {
     }
 
     @BeforeTest
-    public void init() {
+    public void initialization() {
         mainPage = new MainPage();
         marketPage = new MarketPage();
     }
 
     @Test(dataProvider = "TestData")
-    public void test(List<String> makers) {
+    public void goAndAssert(List<String> makers) {
         mainPage
                 .openYandexRu("chrome")
                 .chooseMarketCategory()
@@ -42,6 +46,10 @@ public class YandexTest {
                 .chooseMakers(makers)
                 .clickToAccept()
                 .assertSize(12);
+    }
+
+    @Test
+    public void showProductRating() {
         marketPage
                 .getFirstProduct()
                 .sortClick("по новизне")

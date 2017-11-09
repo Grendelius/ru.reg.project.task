@@ -35,7 +35,7 @@ public class MarketPage {
 
     public MarketPage getFirstProduct() {
         setProduct(getProductBlocks().get(1));
-        System.out.println(getProduct().getAttribute("title"));
+        System.out.println("The fist element in list is: " + getProduct().getAttribute("title").toUpperCase());
         return this;
     }
 
@@ -95,8 +95,8 @@ public class MarketPage {
 
     public void assertSize(int size) {
         ElementsCollection list = (ElementsCollection) getProductBlocks();
-        System.out.println(list.size());
         list.shouldHaveSize(size);
+        System.out.println("Number of elements on this page is: " + size);
     }
 
     static class MarketPageXpaths {

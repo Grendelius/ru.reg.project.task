@@ -57,7 +57,7 @@ public class AdvancedSearchPage extends AbstractPage {
         return this;
     }
 
-    private AdvancedSearchPage setUpPhoneScreenDiagonal(String size) throws NoSuchElementException {
+    AdvancedSearchPage setUpPhoneScreenDiagonal(String size) throws NoSuchElementException {
         List<String> sizesList = new ArrayList<>(Arrays.asList("до 2\"", "2.1\"-2.9\"", "3\"-4\""));
         try {
             searchParameterBlock("Диагональ экрана").click();
@@ -114,7 +114,7 @@ public class AdvancedSearchPage extends AbstractPage {
             for (String s : makers) {
                 zoom(1.5);
                 inputfield.val(s);
-                actions().pause(Duration.ofSeconds(2)).build().perform();
+                actions().pause(Duration.ofMillis(500)).build().perform();
                 if (element.isEnabled()) {
                     actions().moveToElement(element).click().build().perform();
                 }
