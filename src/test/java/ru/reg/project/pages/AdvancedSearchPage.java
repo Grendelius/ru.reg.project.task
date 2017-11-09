@@ -23,7 +23,6 @@ public class AdvancedSearchPage extends AbstractPage {
         return parameter;
     }
 
-
     @Override
     public void clickOnCheckbox(String pName) throws NoSuchElementException {
         try {
@@ -57,7 +56,6 @@ public class AdvancedSearchPage extends AbstractPage {
             $$x(".//label[@class='checkbox__label']").forEach(element -> {
                 for (String p : sizesList)
                     if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
-                        zoom(1.5);
                         actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
                         break;
                     }
@@ -66,7 +64,6 @@ public class AdvancedSearchPage extends AbstractPage {
             $$x("//span[@class='n-filter-enum-sorted__value']").forEach(element -> {
                 for (String p : sizesList) {
                     if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
-                        zoom(1.5);
                         actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
                         break;
                     }
