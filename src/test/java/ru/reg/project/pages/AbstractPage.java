@@ -19,6 +19,6 @@ abstract class AbstractPage {
 
     static void authorization(String loginName, String password) {
         $("login").shouldBe(enabled).val(loginName);
-        $("passwd").shouldBe(enabled).val(password);
+        $("passwd").shouldBe(enabled).val(password).submit();
     }
 }
