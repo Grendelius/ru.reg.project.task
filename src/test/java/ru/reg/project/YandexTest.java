@@ -2,12 +2,11 @@ package ru.reg.project;
 
 
 import com.codeborne.selenide.testng.TextReport;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.annotations.*;
 import ru.reg.project.pages.MainPage;
 import ru.reg.project.pages.MarketPage;
+import ru.reg.project.pages.ProductPage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +17,7 @@ import java.util.List;
 public class YandexTest {
     private MainPage mainPage;
     private MarketPage marketPage;
+    private ProductPage productPage;
 
     @DataProvider(name = "TestData")
     public Object[][] makers() {
@@ -31,7 +31,17 @@ public class YandexTest {
     public void initialization() {
         mainPage = new MainPage();
         marketPage = new MarketPage();
+        productPage = new ProductPage();
+
     }
+
+    @AfterTest
+    public void afterTest() {
+        mainPage = null;
+        marketPage = null;
+        productPage = null;
+    }
+
 
     @Test(dataProvider = "TestData")
     public void goAndAssert(List<String> makers) {
@@ -53,7 +63,8 @@ public class YandexTest {
         marketPage
                 .getFirstProduct()
                 .sortClick("по новизне")
-                .getAndClickOnProduct()
-                .ratingShow();
+                .getAndClickOnProduct();
+        Assert.assertNotNull(productPage.ratingShow());
+
     }
 }

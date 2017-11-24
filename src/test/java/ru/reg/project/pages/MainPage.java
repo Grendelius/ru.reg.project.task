@@ -10,11 +10,13 @@ import static ru.reg.project.settings.BrowserSettings.setUpChrome;
 import static ru.reg.project.settings.BrowserSettings.setUpFireFox;
 
 public class MainPage extends AbstractPage {
+    public static final String PAGE_URL = "https://yandex.ru/";
+
 
     public MainPage openYandexRu(final String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) setUpChrome();
         if (browserName.equalsIgnoreCase("firefox")) setUpFireFox();
-        open("https://yandex.ru/");
+        open(PAGE_URL);
         return (new MainPage());
     }
 
@@ -49,7 +51,6 @@ public class MainPage extends AbstractPage {
 
     public MarketPage chooseMarketCategory() {
         $(byText("Маркет")).click();
-        sleep(2000);
         return (new MarketPage());
     }
 

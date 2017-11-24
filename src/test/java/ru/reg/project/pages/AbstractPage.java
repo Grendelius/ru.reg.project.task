@@ -11,13 +11,13 @@ abstract class AbstractPage {
 
     abstract void clickOnCheckbox(String name);
 
-    static SelenideElement waitUntilEnabledByText(String text) {
+    SelenideElement waitUntilEnabledByText(String text) {
         SelenideElement element = $(byText(text));
         $(element).waitUntil(enabled, 4000).waitUntil(visible, 4000);
         return element;
     }
 
-    static void authorization(String loginName, String password) {
+    void authorization(String loginName, String password) {
         $("login").shouldBe(enabled).val(loginName);
         $("passwd").shouldBe(enabled).val(password).submit();
     }
