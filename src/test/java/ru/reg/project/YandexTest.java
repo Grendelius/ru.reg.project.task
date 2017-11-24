@@ -27,16 +27,16 @@ public class YandexTest {
         };
     }
 
-    @BeforeTest
-    public void initialization() {
+    @BeforeClass
+    public void beforeClass() {
         mainPage = new MainPage();
         marketPage = new MarketPage();
         productPage = new ProductPage();
 
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterClass
+    public void afterClass() {
         mainPage = null;
         marketPage = null;
         productPage = null;
