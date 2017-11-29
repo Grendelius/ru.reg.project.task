@@ -9,8 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
@@ -125,6 +124,7 @@ public class AdvancedSearchPage extends AbstractPage {
 
     public MarketPage clickToAccept() {
         $x("/html/body/div[1]/div[4]/div/div[1]/div[5]/a[2]/span").click();
+        $x("/html/body/div[1]/div[3]/div[2]/div[2]/h1").waitUntil(visible, 4000);
         return (new MarketPage());
     }
 

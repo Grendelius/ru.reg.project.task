@@ -19,11 +19,10 @@ public class YandexTest {
     private MarketPage marketPage;
     private ProductPage productPage;
 
-    @DataProvider(name = "TestData", parallel = true)
+    @DataProvider(name = "TestData")
     public Object[][] data() {
         return new Object[][]{
-                {(new ArrayList<>(Arrays.asList("Apple", "Samsung", "LG", "OnePlus", "Motorola", "Xiaomi", "Ulefone")))},
-                {(new ArrayList<>(Arrays.asList("Meizu", "LG", "Nokia", "Motorola", "Xiaomi", "Sony")))}
+                {new ArrayList<>(Arrays.asList("Apple", "Samsung", "LG", "OnePlus", "Motorola", "Xiaomi", "Ulefone"))}
         };
     }
 
@@ -55,11 +54,14 @@ public class YandexTest {
                 .chooseMakers(makers)
                 .clickToAccept()
                 .assertSize(12);
+    }
+
+    @Test(dependsOnMethods = "goAndAssert")
+    public void checkAfter() {
         marketPage
                 .getFirstProduct()
                 .sortClick("по новизне")
                 .getAndClickOnProduct();
         Assert.assertNotNull(productPage.ratingShow());
-
     }
 }

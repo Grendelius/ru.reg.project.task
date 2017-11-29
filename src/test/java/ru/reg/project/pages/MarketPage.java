@@ -26,10 +26,10 @@ public class MarketPage {
 
     private List<SelenideElement> getProductBlocks() {
         List<SelenideElement> list = new ArrayList<>();
-        List<SelenideElement> upperBlck = $$x("/html/body/div[1]/div[4]/div[2]/div[1]/div[2]/div/div[1]/div/a");
-        List<SelenideElement> bottomBlck = $$x("/html/body/div[1]/div[4]/div[2]/div[1]/div[2]/div/div[3]/div/a");
-        upperBlck.stream().forEachOrdered(element -> list.add(element));
-        bottomBlck.stream().forEachOrdered(element -> list.add(element));
+        List<SelenideElement> upperBlock = $$x("/html/body/div[1]/div[4]/div[2]/div[1]/div[2]/div/div[1]/div/a");
+        List<SelenideElement> bottomBlock = $$x("/html/body/div[1]/div[4]/div[2]/div[1]/div[2]/div/div[3]/div/a");
+        list.addAll(upperBlock);
+        list.addAll(bottomBlock);
         return $$(list);
     }
 
@@ -96,7 +96,11 @@ public class MarketPage {
     public void assertSize(int size) {
         ElementsCollection list = (ElementsCollection) getProductBlocks();
         list.shouldHaveSize(size);
-        System.out.println("Number of elements on this page is: " + size);
+        if (list.size() == size) {
+            System.out.println("Number of elements on this page is: " + size);
+        } else {
+            System.out.println("List size is: " + list.size());
+        }
     }
 
     static class MarketPageXpaths {

@@ -12,7 +12,7 @@ public class BrowserSettings {
     public static void setUpFireFox() {
         browser = "marionette";
         clickViaJs = true;
-        timeout = 8000;
+        timeout = 10000;
     }
 
 }
