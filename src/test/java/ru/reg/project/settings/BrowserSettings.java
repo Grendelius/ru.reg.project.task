@@ -5,7 +5,6 @@ import static com.codeborne.selenide.Configuration.*;
 public class BrowserSettings {
 
     public static void setUpChrome() {
-        browser = "chrome";
         clickViaJs = true;
         timeout = 10000;
     }
@@ -13,7 +12,7 @@ public class BrowserSettings {
     public static void setUpFireFox() {
         browser = "marionette";
         clickViaJs = true;
-        timeout = 10000;
+        timeout = 8000;
     }
 
 }

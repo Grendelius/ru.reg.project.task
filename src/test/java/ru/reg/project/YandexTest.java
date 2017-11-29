@@ -1,6 +1,5 @@
 package ru.reg.project;
 
-
 import com.codeborne.selenide.testng.TextReport;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 @Listeners(TextReport.class)
 
 public class YandexTest {
@@ -19,11 +19,11 @@ public class YandexTest {
     private MarketPage marketPage;
     private ProductPage productPage;
 
-    @DataProvider(name = "TestData")
-    public Object[][] makers() {
+    @DataProvider(name = "TestData", parallel = true)
+    public Object[][] data() {
         return new Object[][]{
-                {new ArrayList<>(Arrays.asList(
-                        "Apple", "Samsung", "LG", "OnePlus", "Motorola", "Xiaomi", "Ulefone"))},
+                {(new ArrayList<>(Arrays.asList("Apple", "Samsung", "LG", "OnePlus", "Motorola", "Xiaomi", "Ulefone")))},
+                {(new ArrayList<>(Arrays.asList("Meizu", "LG", "Nokia", "Motorola", "Xiaomi", "Sony")))}
         };
     }
 
@@ -32,7 +32,6 @@ public class YandexTest {
         mainPage = new MainPage();
         marketPage = new MarketPage();
         productPage = new ProductPage();
-
     }
 
     @AfterClass
@@ -46,7 +45,7 @@ public class YandexTest {
     @Test(dataProvider = "TestData")
     public void goAndAssert(List<String> makers) {
         mainPage
-                .openYandexRu("chrome")
+                .openYandexRu()
                 .chooseMarketCategory()
                 .selectProductsCategory("электроника")
                 .selectProductsSubCategory("мобильные телефоны")
@@ -56,10 +55,6 @@ public class YandexTest {
                 .chooseMakers(makers)
                 .clickToAccept()
                 .assertSize(12);
-    }
-
-    @Test
-    public void showProductRating() {
         marketPage
                 .getFirstProduct()
                 .sortClick("по новизне")

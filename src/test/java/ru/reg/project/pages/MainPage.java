@@ -1,5 +1,6 @@
 package ru.reg.project.pages;
 
+import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.NoSuchElementException;
 
 import static com.codeborne.selenide.Condition.enabled;
@@ -10,12 +11,12 @@ import static ru.reg.project.settings.BrowserSettings.setUpChrome;
 import static ru.reg.project.settings.BrowserSettings.setUpFireFox;
 
 public class MainPage extends AbstractPage {
-    public static final String PAGE_URL = "https://yandex.ru/";
+    private static final String PAGE_URL = "https://yandex.ru/";
 
 
-    public MainPage openYandexRu(final String browserName) {
-        if (browserName.equalsIgnoreCase("chrome")) setUpChrome();
-        if (browserName.equalsIgnoreCase("firefox")) setUpFireFox();
+    public MainPage openYandexRu() {
+        if (WebDriverRunner.isChrome()) setUpChrome();
+        if (WebDriverRunner.isFirefox()) setUpFireFox();
         open(PAGE_URL);
         return (new MainPage());
     }
