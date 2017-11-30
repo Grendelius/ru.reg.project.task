@@ -34,9 +34,8 @@ public class MainPage extends AbstractPage {
     }
 
     public MainPage chooseCity(String city) throws NoSuchElementException {
-        waitUntilEnabledByText("Настройка").click();
+        $(byText("Настройка")).shouldBe(enabled).click();
         waitUntilEnabledByText("Изменить город").click();
-        waitUntilEnabledByText("Город");
         executeJavaScript("arguments[0].click()", $x("//input[@class='checkbox__control']"));
         $x(MainPageXpaths.input_country_field).shouldBe(enabled).val(city);
         try {

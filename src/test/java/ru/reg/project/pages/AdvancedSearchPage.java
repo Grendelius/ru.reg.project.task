@@ -33,22 +33,19 @@ public class AdvancedSearchPage extends AbstractPage {
     @Override
     public void clickOnCheckbox(String pName) throws NoSuchElementException {
         try {
-            SelenideElement checkbox = $$x("//label[@class='checkbox__label']").filter(exactText(pName)).first();
+            SelenideElement checkbox = $$x("//label[@class='checkbox__label']")
+                    .filter(exactText(pName)).first();
             executeJavaScript("arguments[1].click()", checkbox);
         } catch (NoSuchElementException exc) {
-            SelenideElement checkbox =
-                    $$x("//span[@class='n-filter-enum-sorted__value']").filter(exactText(pName)).first();
+            SelenideElement checkbox = $$x("//span[@class='n-filter-enum-sorted__value']")
+                    .filter(exactText(pName)).first();
             actions().moveToElement(checkbox).click().build().perform();
         }
     }
 
     public AdvancedSearchPage setUpPrice(Integer from, Integer to) {
-        if (from == null) {
-            $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
-        }
-        if (to == null) {
-            $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
-        }
+        if (from == null) $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
+        if (to == null) $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
         if (from != null && to != null) {
             $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
             $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
@@ -61,20 +58,13 @@ public class AdvancedSearchPage extends AbstractPage {
         try {
             searchParameterBlock("Диагональ экрана").click();
             $$x(".//label[@class='checkbox__label']").forEach(element -> {
-                for (String p : sizesList)
-                    if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
-                        actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
-                        break;
-                    }
+                if (sizesList.stream().anyMatch(p -> size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())))
+                    actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
             });
         } catch (NoSuchElementException exc) {
             $$x("//span[@class='n-filter-enum-sorted__value']").forEach(element -> {
-                for (String p : sizesList) {
-                    if (size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())) {
-                        actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
-                        break;
-                    }
-                }
+                if (sizesList.stream().anyMatch(p -> size.equalsIgnoreCase(p) && p.equalsIgnoreCase(element.getText())))
+                    actions().moveToElement(element).click().pause(Duration.ofSeconds(1)).build().perform();
             });
         }
         return this;
@@ -82,16 +72,9 @@ public class AdvancedSearchPage extends AbstractPage {
 
     public AdvancedSearchPage setUpPhoneScreenDiagonalPrecisely(Float from, Float to) {
         searchParameterBlock("Диагональ экрана (точно), \"").click();
-        if (from == null) {
-            $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
-            zoom(1);
-        }
-        if (to == null) {
-            $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
-            zoom(1);
-        }
+        if (from == null) $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
+        if (to == null) $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
         if (from != null && to != null) {
-            zoom(1);
             $("#glf-4925721-from").shouldBe(enabled).val(Float.toString(from));
             $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
         }

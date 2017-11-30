@@ -64,12 +64,12 @@ public class MarketPage {
     public MarketPage selectProductsCategory(String category) throws NoSuchElementException {
         try {
             $$x(MarketPageXpaths.categoryDom).filter(exactText(category)).first().doubleClick();
-            $x("//div//h1").waitUntil(visible, 10000).shouldHave(exactText(category));
+            $x("//div//h1").waitUntil(visible, 8000).shouldHave(exactText(category));
         } catch (NoSuchElementException exc) {
             System.out.print("Element by text: " + category + "not found");
             System.out.println(exc.getMessage());
             refresh();
-            $(byText(category)).waitUntil(visible, 10000).doubleClick();
+            $(byText(category)).waitUntil(visible, 8000).doubleClick();
         }
         return this;
     }
@@ -82,7 +82,7 @@ public class MarketPage {
             System.out.print("Element by text: " + subcategory + "not found");
             System.out.println(exc.getMessage());
             refresh();
-            $(byText(subcategory)).waitUntil(visible, 10000).doubleClick();
+            $(byText(subcategory)).waitUntil(visible, 8000).doubleClick();
         }
         return this;
     }
