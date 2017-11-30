@@ -1,5 +1,6 @@
 package ru.reg.project.pages;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,8 +14,17 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MarketPage {
+    private String PAGE_URL = "https://market.yandex.ru/";
     private SelenideElement product;
     private AdvancedSearchPage advancedSearchPageSteps;
+
+    public MarketPage() {
+    }
+
+    public MarketPage(String browser) {
+        Configuration.browser = browser;
+        open(PAGE_URL);
+    }
 
     private SelenideElement getProduct() {
         return product;
