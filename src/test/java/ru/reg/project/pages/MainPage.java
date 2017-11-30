@@ -39,8 +39,8 @@ public class MainPage extends AbstractPage {
         executeJavaScript("arguments[0].click()", $x("//input[@class='checkbox__control']"));
         $x(MainPageXpaths.input_country_field).shouldBe(enabled).val(city);
         try {
-            $x(MainPageXpaths.countries_popup)
-                    .$$x(MainPageXpaths.popup_countries_field).filter(exactText(city)).first().click();
+            $x(MainPageXpaths.countries_popup).$$x(MainPageXpaths.popup_countries_field)
+                    .filter(exactText(city)).first().click();
             waitUntilEnabledByText("Сохранить").submit();
         } catch (NoSuchElementException exc) {
             screenshot("popup_not_found");
