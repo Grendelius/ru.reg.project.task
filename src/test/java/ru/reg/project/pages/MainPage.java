@@ -19,7 +19,7 @@ public class MainPage extends AbstractPage {
         if (browser.equalsIgnoreCase(CHROME)) setUpChrome();
         if (browser.equalsIgnoreCase(FIREFOX)) setUpFireFox();
         open(PAGE_URL);
-        return (new MainPage());
+        return page(MainPage.class);
     }
 
     public MainPage loging(String login, String password) {
@@ -53,7 +53,7 @@ public class MainPage extends AbstractPage {
 
     public MarketPage chooseMarketCategory() {
         $(byText("Маркет")).click();
-        return (new MarketPage());
+        return page(MarketPage.class);
     }
 
     public void chooseMusicCategory() {
