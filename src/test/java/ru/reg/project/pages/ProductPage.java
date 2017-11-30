@@ -5,7 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ProductPage {
-    private String rating;
 
     public String ratingShow() {
         SelenideElement rating = $x("//div[@class='rating__value'][1]");

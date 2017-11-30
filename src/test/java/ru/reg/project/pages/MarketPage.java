@@ -104,8 +104,6 @@ public class MarketPage {
     }
 
     static class MarketPageXpaths {
-        static String allCategoriesBtn = ("/html/body/div[1]/div[2]/div[1]/div/div[1]/div/button/span/text()='Все категории'");
-        static String subCategoriesLink = ("/html/body/div[4]/div[1]/div[15]/div/div/div[2]/div[1]/div/a");
         static String categoryDom = ("//a[@class='link topmenu__link']");
         static String subCategoryDom = ("//div[@class='catalog-menu__list']/a");
     }
