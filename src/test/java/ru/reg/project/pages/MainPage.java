@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MainPage extends Page {
-    private static final String PAGE_URL = "https://yandex.ru/";
+    private final String PAGE_URL = "https://yandex.ru/";
 
     public MainPage() {
         open(PAGE_URL);

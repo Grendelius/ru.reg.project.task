@@ -14,7 +14,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertTrue;
 
 public class MarketPage extends Page {
-    private String PAGE_URL = "https://market.yandex.ru/";
+    private final String PAGE_URL = "https://market.yandex.ru/";
     private SelenideElement product;
     private AdvancedSearchPage advancedSearchPageSteps;
 
