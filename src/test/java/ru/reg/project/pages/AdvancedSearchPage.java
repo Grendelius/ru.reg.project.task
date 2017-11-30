@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
-public class AdvancedSearchPage extends AbstractPage {
+public class AdvancedSearchPage extends Page {
     private SelenideElement parameter;
 
     private SelenideElement getParameter() {
@@ -30,8 +30,7 @@ public class AdvancedSearchPage extends AbstractPage {
         return getParameter();
     }
 
-    @Override
-    public void clickOnCheckbox(String pName) throws NoSuchElementException {
+    private void clickOnCheckbox(String pName) throws NoSuchElementException {
         try {
             SelenideElement checkbox = $$x("//label[@class='checkbox__label']")
                     .filter(exactText(pName)).first();
@@ -93,14 +92,12 @@ public class AdvancedSearchPage extends AbstractPage {
         SelenideElement inputfield = parentDiv.find(byXpath(".//input[@class='input__control']"));
         ElementsCollection checkboxes = parentDiv.findAll(byXpath(".//input[@class='checkbox__control']"));
         checkboxes.forEach(element -> {
-            for (String s : makers) {
+            makers.forEach(s -> {
                 zoom(1.5);
                 inputfield.val(s);
                 actions().pause(Duration.ofMillis(500)).build().perform();
-                if (element.isEnabled()) {
-                    actions().moveToElement(element).click().build().perform();
-                }
-            }
+                if (element.isEnabled()) actions().moveToElement(element).click().build().perform();
+            });
         });
         return this;
     }
@@ -110,7 +107,7 @@ public class AdvancedSearchPage extends AbstractPage {
                 .waitUntil(enabled, 4000).click();
         $x("/html/body/div[1]/div[3]/div[2]/div[2]/h1")
                 .waitUntil(visible, 4000);
-        return page(MarketPage.class);
+        return (new MarketPage());
     }
 
 

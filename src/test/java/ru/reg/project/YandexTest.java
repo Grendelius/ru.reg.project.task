@@ -1,11 +1,12 @@
 package ru.reg.project;
 
 import com.codeborne.selenide.testng.TextReport;
-import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 import ru.reg.project.pages.MainPage;
 import ru.reg.project.pages.MarketPage;
-import ru.reg.project.pages.ProductPage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +18,6 @@ import java.util.List;
 public class YandexTest {
     private MainPage mainPage;
     private MarketPage marketPage;
-    private ProductPage productPage;
 
     @DataProvider(name = "TestData")
     public Object[][] data() {
@@ -28,23 +28,13 @@ public class YandexTest {
 
     @BeforeClass
     public void beforeClass() {
-        mainPage = new MainPage();
+        mainPage = new MainPage("chrome");
         marketPage = new MarketPage();
-        productPage = new ProductPage();
     }
-
-    @AfterClass
-    public void afterClass() {
-        mainPage = null;
-        marketPage = null;
-        productPage = null;
-    }
-
 
     @Test(dataProvider = "TestData")
     public void goAndAssert(List<String> makers) {
         mainPage
-                .openYandexRu()
                 .chooseMarketCategory()
                 .selectProductsCategory("электроника")
                 .selectProductsSubCategory("мобильные телефоны")
@@ -53,15 +43,30 @@ public class YandexTest {
                 .setUpPhoneScreenDiagonalPrecisely(3f, null)
                 .chooseMakers(makers)
                 .clickToAccept()
-                .assertSize(12);
+                .assertSizeOfBlock(12);
     }
 
     @Test(dependsOnMethods = "goAndAssert")
     public void checkAfter() {
         marketPage
-                .getFirstProduct()
+                .setFirstProduct()
                 .sortClick("по новизне")
-                .getAndClickOnProduct();
-        Assert.assertNotNull(productPage.ratingShow());
+                .getFirstAndClickOnIt()
+                .ratingShow();
     }
+
+    @Test(enabled = false)
+    public void blocksUploadTest() {
+        marketPage
+                .selectProductsCategory("электроника")
+                .selectProductsSubCategory("мобильные телефоны")
+                .assertSizeOfBlock(12);
+        marketPage
+                .setFirstProduct();
+        marketPage
+                .sortClick("по новизне")
+                .getFirstAndClickOnIt()
+                .ratingShow();
+    }
+
 }

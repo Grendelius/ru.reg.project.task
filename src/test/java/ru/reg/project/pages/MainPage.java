@@ -7,13 +7,16 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class MainPage extends AbstractPage {
+public class MainPage extends Page {
     private static final String PAGE_URL = "https://yandex.ru/";
 
-
-    public MainPage openYandexRu() {
+    public MainPage() {
         open(PAGE_URL);
-        return page(MainPage.class);
+    }
+
+    public MainPage(String browser) {
+        super(browser);
+        open(PAGE_URL);
     }
 
     public MainPage loging(String login, String password) {
@@ -22,8 +25,7 @@ public class MainPage extends AbstractPage {
         return this;
     }
 
-    @Override
-    void clickOnCheckbox(String name) {
+    public void clickOnCheckbox(String name) {
         executeJavaScript("arguments[0].click()", $(byText(name)));
     }
 
@@ -45,7 +47,7 @@ public class MainPage extends AbstractPage {
     }
 
     public MarketPage chooseMarketCategory() {
-        $(byText("Маркет")).click();
+        waitUntilEnabledByText("Маркет").click();
         return page(MarketPage.class);
     }
 
