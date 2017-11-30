@@ -106,9 +106,11 @@ public class AdvancedSearchPage extends AbstractPage {
     }
 
     public MarketPage clickToAccept() {
-        $x("/html/body/div[1]/div[4]/div/div[1]/div[5]/a[2]/span").click();
-        $x("/html/body/div[1]/div[3]/div[2]/div[2]/h1").waitUntil(visible, 4000);
-        return (new MarketPage());
+        $x("/html/body/div[1]/div[4]/div/div[1]/div[5]/a[2]")
+                .waitUntil(enabled, 4000).click();
+        $x("/html/body/div[1]/div[3]/div[2]/div[2]/h1")
+                .waitUntil(visible, 4000);
+        return page(MarketPage.class);
     }
 
 

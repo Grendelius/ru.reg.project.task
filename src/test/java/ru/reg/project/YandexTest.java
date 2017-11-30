@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.openqa.selenium.remote.BrowserType.CHROME;
-
 
 @Listeners(TextReport.class)
 
@@ -46,7 +44,7 @@ public class YandexTest {
     @Test(dataProvider = "TestData")
     public void goAndAssert(List<String> makers) {
         mainPage
-                .openYandexRu(CHROME)
+                .openYandexRu()
                 .chooseMarketCategory()
                 .selectProductsCategory("электроника")
                 .selectProductsSubCategory("мобильные телефоны")
