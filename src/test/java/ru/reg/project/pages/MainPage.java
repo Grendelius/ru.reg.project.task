@@ -25,7 +25,7 @@ public class MainPage extends Page {
         return this;
     }
 
-    public void clickOnCheckbox(String name) {
+    private void clickOnCheckbox(String name) {
         executeJavaScript("arguments[0].click()", $(byText(name)));
     }
 

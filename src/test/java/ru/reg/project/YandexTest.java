@@ -32,7 +32,7 @@ public class YandexTest {
         marketPage = new MarketPage("chrome");
     }
 
-    @Test(dataProvider = "TestData", enabled = false)
+    @Test(dataProvider = "TestData")
     public void goAndAssert(List<String> makers) {
         mainPage
                 .chooseMarketCategory() // Go to Yandex
@@ -55,7 +55,7 @@ public class YandexTest {
                 .ratingShow(); // Show the phone rating
     }
 
-    @Test()
+    @Test(enabled = false)
     public void blocksUploadTest() {
         marketPage
                 .selectProductsCategory("электроника")
