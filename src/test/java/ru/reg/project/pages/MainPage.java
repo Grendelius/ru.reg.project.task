@@ -19,7 +19,7 @@ public class MainPage extends Page {
         open(PAGE_URL);
     }
 
-    public MainPage loging(String login, String password) {
+    public MainPage logIn(String login, String password) {
         clickOnCheckbox("Чужой компьютер");
         authorization(login, password);
         return this;
