@@ -42,7 +42,7 @@ public class YandexTest {
                 .setUpPrice(null, 20000) // Set up price
                 .setUpPhoneScreenDiagonalPrecisely(3f, null) // Set up phone screen diagonal
                 .chooseMakers(makers) // Select makers
-                .clickToAccept() // Accept
+                .clickToAccept() // Accept filters
                 .assertSizeOfBlock(10); // Size assert (count of products on the market page)
     }
 
