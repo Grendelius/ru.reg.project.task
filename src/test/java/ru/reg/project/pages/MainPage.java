@@ -59,7 +59,7 @@ public class MainPage extends Page {
 
     public void chooseVideoCategory() {
         waitUntilEnabledByText("Видео").click();
-        $x("/html/body/div[4]").waitUntil(enabled, 4000);
+        $x("//*[@id='nb-1']/body").waitUntil(enabled, 4000);
 //        return (new VideoYandexPage());
     }
 

@@ -64,7 +64,6 @@ public class MarketPage extends Page {
             $x("//div//h1").waitUntil(visible, 4000).shouldHave(exactText(category));
         } catch (NoSuchElementException exc) {
             System.out.print("Element by text: " + category + "not found");
-            System.out.println(exc.getMessage());
             refresh();
             $(byText(category)).waitUntil(visible, 3000).doubleClick();
         }

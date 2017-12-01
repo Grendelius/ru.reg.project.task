@@ -96,7 +96,8 @@ public class AdvancedSearchPage extends Page {
                 zoom(1.5);
                 inputfield.val(s);
                 actions().pause(Duration.ofMillis(500)).build().perform();
-                if (element.isEnabled()) actions().moveToElement(element).click().build().perform();
+                if (element.isEnabled())
+                    actions().moveToElement(element).click().build().perform();
             });
         });
         return this;
