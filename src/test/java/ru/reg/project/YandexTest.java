@@ -29,10 +29,10 @@ public class YandexTest {
     @BeforeClass
     public void beforeClass() {
         mainPage = new MainPage("chrome");
-        marketPage = new MarketPage();
+        marketPage = new MarketPage("chrome");
     }
 
-    @Test(dataProvider = "TestData")
+    @Test(dataProvider = "TestData", enabled = false)
     public void goAndAssert(List<String> makers) {
         mainPage
                 .chooseMarketCategory() // Go to Yandex
@@ -43,7 +43,7 @@ public class YandexTest {
                 .setUpPhoneScreenDiagonalPrecisely(3f, null) // Set up phone screen diagonal
                 .chooseMakers(makers) // Select makers
                 .clickToAccept() // Accept
-                .assertSizeOfBlock(12); // Size assert (count of products on the market page)
+                .assertSizeOfBlock(10); // Size assert (count of products on the market page)
     }
 
     @Test(dependsOnMethods = "goAndAssert")
@@ -55,12 +55,12 @@ public class YandexTest {
                 .ratingShow(); // Show the phone rating
     }
 
-    @Test(enabled = false)
+    @Test()
     public void blocksUploadTest() {
         marketPage
                 .selectProductsCategory("электроника")
                 .selectProductsSubCategory("мобильные телефоны")
-                .assertSizeOfBlock(12);
+                .assertSizeOfBlock(10);
         marketPage
                 .setFirstProduct();
         marketPage

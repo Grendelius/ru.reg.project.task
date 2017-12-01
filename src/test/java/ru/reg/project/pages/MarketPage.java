@@ -1,17 +1,15 @@
 package ru.reg.project.pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.NoSuchElementException;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static org.testng.Assert.assertTrue;
 
 public class MarketPage extends Page {
     private final String PAGE_URL = "https://market.yandex.ru/";
@@ -38,11 +36,8 @@ public class MarketPage extends Page {
         return getProduct().getAttribute("href");
     }
 
-    private List<SelenideElement> getProductBlocks() {
-        List<SelenideElement> selenideElementList = new ArrayList<>();
-        List<SelenideElement> productsList = $$x("//a[contains(@class, 'n-snippet-cell2__image')]");
-        selenideElementList.addAll(productsList);
-        return selenideElementList;
+    private ElementsCollection getProductBlocks() {
+        return $$x("//a[contains(@class, 'n-snippet-cell2__image')]");
     }
 
     public MarketPage sortClick(String sortName) {
@@ -106,7 +101,7 @@ public class MarketPage extends Page {
     }
 
     public void assertSizeOfBlock(int size) {
-        System.out.println("SIZE OF BLOCK IS: " + getProductBlocks().size());
-        assertTrue(getProductBlocks().size() == size);
+        System.out.println("Count of products on the page is: " + getProductBlocks().size());
+        getProductBlocks().shouldHave(sizeGreaterThanOrEqual(size));
     }
 }
