@@ -35,24 +35,24 @@ public class YandexTest {
     @Test(dataProvider = "TestData")
     public void goAndAssert(List<String> makers) {
         mainPage
-                .chooseMarketCategory()
-                .selectProductsCategory("электроника")
-                .selectProductsSubCategory("мобильные телефоны")
-                .goToAdvancedSearch() //Initialized new AdvancedSearchPage
-                .setUpPrice(null, 20000)
-                .setUpPhoneScreenDiagonalPrecisely(3f, null)
-                .chooseMakers(makers)
-                .clickToAccept()
-                .assertSizeOfBlock(12);
+                .chooseMarketCategory() // Go to Yandex
+                .selectProductsCategory("электроника") // Choose category
+                .selectProductsSubCategory("мобильные телефоны") // Choose phones
+                .goToAdvancedSearch() // go to Advanced Search
+                .setUpPrice(null, 20000) // Set up price
+                .setUpPhoneScreenDiagonalPrecisely(3f, null) // Set up phone screen diagonal
+                .chooseMakers(makers) // Select makers
+                .clickToAccept() // Accept
+                .assertSizeOfBlock(12); // Size assert (count of products on the market page)
     }
 
     @Test(dependsOnMethods = "goAndAssert")
     public void checkAfter() {
         marketPage
-                .setFirstProduct()
-                .sortClick("по новизне")
-                .getFirstAndClickOnIt()
-                .ratingShow();
+                .setFirstProduct() // Set and remember the first phone on the page
+                .sortClick("по новизне") // Change type of sorting
+                .getFirstAndClickOnIt() // Click on @setFirstProduct
+                .ratingShow(); // Show the phone rating
     }
 
     @Test(enabled = false)
