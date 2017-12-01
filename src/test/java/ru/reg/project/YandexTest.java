@@ -29,7 +29,7 @@ public class YandexTest {
     @BeforeClass
     public void beforeClass() {
         mainPage = new MainPage("chrome");
-        marketPage = new MarketPage("chrome");
+        marketPage = new MarketPage();
     }
 
     @Test(dataProvider = "TestData")
