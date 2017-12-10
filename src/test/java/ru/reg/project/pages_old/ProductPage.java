@@ -1,4 +1,4 @@
-package ru.reg.project.pages;
+package ru.reg.project.pages_old;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
