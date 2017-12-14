@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$$;
 
 @Name("Yandex MainPage navigation panel")
-public class MainPageNavigationBlock extends ElementsContainer {
+public class YandexMainPageNavigationPanel extends ElementsContainer {
 
     @Name("Section name")
     @FindBy(xpath = ".//a")

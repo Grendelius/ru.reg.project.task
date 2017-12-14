@@ -8,7 +8,7 @@ import ru.yandex.qatools.htmlelements.annotations.Name;
 import static com.codeborne.selenide.Selenide.$;
 
 @Name("Yandex MainPage user's authorization block")
-public class MainPageAuthBlock extends ElementsContainer {
+public class YandexMainPageAuthBlock extends ElementsContainer {
 
     @Name("User login field")
     @FindBy(xpath = ".//input[@name='login']")

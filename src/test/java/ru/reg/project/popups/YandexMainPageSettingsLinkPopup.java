@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.actions;
 
 @Name("YandexMainPage settings link popup")
-public class SettingsLinkPopup extends ElementsContainer {
+public class YandexMainPageSettingsLinkPopup extends ElementsContainer {
 
     @Name("Menu item link")
     @FindBy(xpath = ".//div[@role='menuitem']/a")

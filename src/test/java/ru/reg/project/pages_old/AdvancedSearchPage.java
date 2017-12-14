@@ -53,7 +53,7 @@ public class AdvancedSearchPage extends Page {
     }
 
     AdvancedSearchPage setUpPhoneScreenDiagonal(String size) throws NoSuchElementException {
-        List<String> sizesList = new ArrayList<>(Arrays.asList("до 2\"", "2.1\"-2.9\"", "3\"-4\""));
+        List<String> sizesList = new ArrayList<>(Arrays.asList("до 2\"", "2.1\"-2.9\"", "3\"-4\"", "4.1\"-4.9\""));
         try {
             searchParameterBlock("Диагональ экрана").click();
             $$x(".//label[@class='checkbox__label']").forEach(element -> {
