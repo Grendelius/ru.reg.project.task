@@ -4,6 +4,9 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import ru.reg.project.pages_old.MainPage;
 import ru.reg.project.popups.YandexCitySettingsPagePopup;
+import ru.sbtqa.tag.pagefactory.annotations.ActionTitle;
+import ru.sbtqa.tag.pagefactory.annotations.ElementTitle;
+import ru.sbtqa.tag.pagefactory.annotations.PageEntry;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -11,21 +14,23 @@ import static com.codeborne.selenide.Selenide.*;
 @Name("Yandex set city page")
 public class YandexCitySettingsPage {
 
-    @Name("Input city field")
+    @ElementTitle("Input city field")
     @FindBy(xpath = "//input[@class='input__control input__input']")
     private SelenideElement inputCityField;
 
-    @Name("Select the city automatically checkbox")
+    @ElementTitle("Select the city automatically checkbox")
     @FindBy(xpath = "//input[@class='checkbox__control']")
     private SelenideElement autoCitySelectCheckBox;
 
-    @Name("Save button")
+    @ElementTitle("Save button")
     @FindBy(xpath = "//button[@type='submit']")
     private SelenideElement saveBtn;
 
+    @ElementTitle("Cities popup")
     @FindBy(xpath = "//div[@class='popup__content']")
     private YandexCitySettingsPagePopup citiesPopup;
 
+    @ActionTitle(value = "Поиск и выбор города")
     public MainPage searchAndChooseTheCity(String cityName) {
         executeJavaScript("arguments[0].click()", $(autoCitySelectCheckBox));
         $(inputCityField).setValue(cityName);

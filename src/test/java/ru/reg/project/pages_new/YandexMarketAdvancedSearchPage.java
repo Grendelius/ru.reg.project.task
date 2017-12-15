@@ -4,6 +4,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import ru.reg.project.blocks.AdvancedSearchPageChoosingMakersBlock;
+import ru.sbtqa.tag.pagefactory.annotations.ActionTitle;
+import ru.sbtqa.tag.pagefactory.annotations.ElementTitle;
+import ru.sbtqa.tag.pagefactory.annotations.PageEntry;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import java.util.List;
@@ -15,24 +18,24 @@ import static com.codeborne.selenide.Selenide.*;
 @Name("Yandex Market Advanced search page")
 public class YandexMarketAdvancedSearchPage {
 
-    @Name("Parameters block")
+    @ElementTitle("Parameters block")
     @FindBy(xpath = "//span[@class='title__content']")
     private ElementsCollection parametersBlocks;
 
-    @Name("Checkboxes")
+    @ElementTitle("Checkboxes")
     @FindBy(xpath = ".//label[@class='checkbox__label']")
     private ElementsCollection checkboxes;
 
-    @Name("Makers block")
+    @ElementTitle("Makers block")
     @FindBy(xpath = "//body/div[1]/div[4]/div/div[1]/div[1]/div[2]")
     private AdvancedSearchPageChoosingMakersBlock makersBlock;
 
-    @Name("'Show filtered' link")
+    @ElementTitle("'Show filtered' link")
     @FindBy(xpath = "//a[contains(@class, 'button_action_show-filtered')]")
     private SelenideElement showFilteredLink;
 
     private SelenideElement searchParameterBlock(String parameterName) {
-        return $$(parametersBlocks).filter(exactText(parameterName)).first();
+        return parametersBlocks.filter(exactText(parameterName)).first();
     }
 
     private void openTheBlock(String parameterName) {
@@ -43,6 +46,7 @@ public class YandexMarketAdvancedSearchPage {
         $$(checkboxes).filter(exactText(name)).first().click();
     }
 
+    @ActionTitle(value = "Установить цену в диапазоне")
     public void setUpPrice(Integer from, Integer to) {
         if (from == null) $x("//input[@id='glf-priceto-var']").shouldBe(enabled).val(Integer.toString(to));
         if (to == null) $x("//input[@id='glf-pricefrom-var']").shouldBe(enabled).val(Integer.toString(from));
@@ -52,6 +56,7 @@ public class YandexMarketAdvancedSearchPage {
         }
     }
 
+    @ActionTitle(value = "Установить размер диагонали экрана точно в диапазоне")
     public void setUpPhoneScreenDiagonalPrecisely(Float from, Float to) {
         openTheBlock("Диагональ экрана (точно), \"");
         if (from == null) $("#glf-4925721-to").shouldBe(enabled).val(Float.toString(to));
@@ -62,10 +67,12 @@ public class YandexMarketAdvancedSearchPage {
         }
     }
 
+    @ActionTitle(value = "Выбрать производителей")
     public void chooseMakers(List<String> makersList) {
         makersBlock.setUpMakers(makersList);
     }
 
+    @ActionTitle(value = "Показать подходящие")
     public YandexMarketResultPage clickOnShowFiltered() {
         $(showFilteredLink).click();
         return page(YandexMarketResultPage.class);

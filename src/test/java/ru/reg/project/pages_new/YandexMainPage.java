@@ -5,6 +5,9 @@ import org.openqa.selenium.support.FindBy;
 import ru.reg.project.blocks.YandexMainPageAuthBlock;
 import ru.reg.project.blocks.YandexMainPageNavigationPanel;
 import ru.reg.project.popups.YandexMainPageSettingsLinkPopup;
+import ru.sbtqa.tag.pagefactory.annotations.ActionTitle;
+import ru.sbtqa.tag.pagefactory.annotations.ElementTitle;
+import ru.sbtqa.tag.pagefactory.annotations.PageEntry;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -24,15 +27,17 @@ public class YandexMainPage {
     @FindBy(xpath = "//body/div[4]/div[2]")
     private YandexMainPageSettingsLinkPopup yandexMainPageSettingsLinkPopup;
 
-    @Name("Settings link")
+    @ElementTitle("Settings link")
     @FindBy(xpath = "//span[@class='link__inner'][contains(text(), 'Настройка')]")
     private SelenideElement settingsLink;
 
+    @ActionTitle(value = "Переход на Yandex Market")
     public YandexMarketMainPage goToYandexMarket() {
         yandexMainPageNavigationPanel.sectionClick("Маркет");
         return page(YandexMarketMainPage.class);
     }
 
+    @ActionTitle(value = "Изменить город")
     public YandexCitySettingsPage setCity() {
         $(settingsLink).click();
         yandexMainPageSettingsLinkPopup.clickOnPopupMenuItemLink("Изменить город");

@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 @Listeners(TextReport.class)
 
-public class YandexTest {
+public class YandexTestNG {
     private YandexMarketMainPage yandexMarketMainPage;
     private YandexMarketResultPage yandexMarketResultPage;
     private YandexMarketAdvancedSearchPage yandexMarketAdvancedSearchPage;
@@ -55,42 +55,4 @@ public class YandexTest {
         yandexMarketProductPage = yandexMarketResultPage.goToFirstProduct();
         yandexMarketProductPage.showTheProductInfo();
     }
-
-//    @Test(dataProvider = "TestData", enabled = false)
-//    public void goAndAssert(List<String> makers) {
-//        mainPage
-//                .chooseMarketCategory() // Go to Yandex
-//                .selectProductsCategory("электроника") // Choose category
-//                .selectProductsSubCategory("мобильные телефоны") // Choose phones
-//                .goToAdvancedSearch() // go to Advanced Search
-//                .setUpPrice(null, 20000) // Set up price
-//                .setUpPhoneScreenDiagonalPrecisely(3f, null) // Set up phone screen diagonal
-//                .chooseMakers(makers) // Select makers
-//                .clickToAccept() // Accept filters
-//                .assertSizeOfBlock(10); // Size assert (count of products on the market page)
-//    }
-//
-//    @Test(dependsOnMethods = "goAndAssert", enabled = false)
-//    public void checkAfter() {
-//        marketPage
-//                .setFirstProduct() // Set and remember the first phone on the page
-//                .sortClick("по новизне") // Change type of sorting
-//                .getFirstAndClickOnIt() // Click on @setFirstProduct
-//                .ratingShow(); // Show the phone rating
-//    }
-//
-//    @Test(enabled = false)
-//    public void blocksUploadTest() {
-//        marketPage
-//                .selectProductsCategory("электроника")
-//                .selectProductsSubCategory("мобильные телефоны")
-//                .assertSizeOfBlock(10);
-//        marketPage
-//                .setFirstProduct();
-//        marketPage
-//                .sortClick("по новизне")
-//                .getFirstAndClickOnIt()
-//                .ratingShow();
-//    }
-
 }
