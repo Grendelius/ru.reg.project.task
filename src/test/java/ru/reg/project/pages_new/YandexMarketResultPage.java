@@ -15,18 +15,19 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 public class YandexMarketResultPage {
     private String product_url;
 
+    @ElementTitle("Сортировка по:")
     @FindBy(xpath = "//div[@class='n-filter-block_pos_left i-bem']")
     private YandexMarketFilterBlock yandexMarketFilterBlock;
 
-    @ElementTitle("'Local offers first' checkbox")
+    @ElementTitle("Местные предложения")
     @FindBy(xpath = "//input[@id='local-offers-first']")
     private SelenideElement localOffersCheckbox;
 
-    @ElementTitle("Products blocks")
+    @ElementTitle("Продукты")
     @FindBy(xpath = "//a[contains(@class, 'n-snippet-cell2__image')]")
     private ElementsCollection productsBlocks;
 
-    @ElementTitle("'Go to all search filters' link")
+    @ElementTitle("Расширенный фильтр товаров")
     @FindBy(xpath = "//a[contains(text(), 'Перейти ко всем фильтрам')]")
     private SelenideElement allFiltersLink;
 

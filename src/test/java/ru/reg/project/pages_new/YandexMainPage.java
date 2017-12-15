@@ -14,19 +14,21 @@ import static com.codeborne.selenide.Selenide.page;
 
 @PageEntry(title = "Yandex main page")
 public class YandexMainPage {
-
     public static final String PAGE_URL = "https://yandex.ru/";
 
+    @ElementTitle("Блок аутентификации")
     @FindBy(xpath = "//div[@class='domik3__slider']")
     private YandexMainPageAuthBlock yandexMainPageAuthBlock;
 
+    @ElementTitle("Навигация по сервису")
     @FindBy(xpath = "//div[@role='navigation']")
     private YandexMainPageNavigationPanel yandexMainPageNavigationPanel;
 
+    @ElementTitle("Всплывающее окно настроек пользователя")
     @FindBy(xpath = "//body/div[4]/div[2]")
     private YandexMainPageSettingsLinkPopup yandexMainPageSettingsLinkPopup;
 
-    @ElementTitle("Settings link")
+    @ElementTitle("Настройки")
     @FindBy(xpath = "//span[@class='link__inner'][contains(text(), 'Настройка')]")
     private SelenideElement settingsLink;
 
