@@ -5,8 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
-import static com.codeborne.selenide.Selenide.$;
-
 @Name("Yandex MainPage user's authorization block")
 public class YandexMainPageAuthBlock extends ElementsContainer {
 
@@ -23,14 +21,14 @@ public class YandexMainPageAuthBlock extends ElementsContainer {
     private SelenideElement sbmBtn;
 
     public void inputLogin(String login) {
-        $(loginField).val(login);
+        loginField.val(login);
     }
 
     public void inputPassword(String psw) {
-        $(pswField).val(psw);
+        pswField.val(psw);
     }
 
     public void submitBtnClick() {
-        $(sbmBtn).click();
+        sbmBtn.click();
     }
 }

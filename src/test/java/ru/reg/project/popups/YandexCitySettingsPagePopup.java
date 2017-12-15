@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.$$;
 
 @Name("City input field popup")
 public class YandexCitySettingsPagePopup extends ElementsContainer {
@@ -16,6 +15,6 @@ public class YandexCitySettingsPagePopup extends ElementsContainer {
     private ElementsCollection citiesLink;
 
     public void chooseCity(String cityName) {
-        $$(citiesLink).filter(exactText(cityName)).first().click();
+        citiesLink.filter(exactText(cityName)).first().click();
     }
 }

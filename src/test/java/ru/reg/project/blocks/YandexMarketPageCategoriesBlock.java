@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.$$;
 
 @Name("Categories block on main page of YandexMarket")
 public class YandexMarketPageCategoriesBlock extends ElementsContainer {
@@ -17,6 +16,6 @@ public class YandexMarketPageCategoriesBlock extends ElementsContainer {
 
 
     public void navigateToCategoryAndClick(String category) {
-        $$(categoriesNames).filter(exactText(category)).first().doubleClick();
+        categoriesNames.filter(exactText(category)).first().doubleClick();
     }
 }

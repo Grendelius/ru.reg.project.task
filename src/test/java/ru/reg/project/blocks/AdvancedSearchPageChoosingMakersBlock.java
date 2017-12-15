@@ -6,9 +6,10 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
+import java.time.Duration;
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.actions;
 
 @Name("Choosing makers block")
 public class AdvancedSearchPageChoosingMakersBlock extends ElementsContainer {
@@ -21,19 +22,18 @@ public class AdvancedSearchPageChoosingMakersBlock extends ElementsContainer {
     @FindBy(xpath = ".//input[@class='input__control']")
     private SelenideElement searchInputField;
 
-    @Name("Checboxes")
+    @Name("Checkboxes")
     @FindBy(xpath = ".//input[@class='checkbox__control']")
     private ElementsCollection checkboxes;
 
     public void setUpMakers(List<String> makersList) {
-        $(button).click();
-        $$(checkboxes).forEach(selenideElement -> makersList.forEach(s -> {
-            $(searchInputField).val(s);
-            if (selenideElement.isEnabled()) {
-                zoom(0.5);
-                actions().moveToElement(selenideElement).click().build().perform();
-            }
+        button.click();
+        checkboxes.forEach(element -> makersList.forEach(s -> {
+            searchInputField.val(s);
+            actions().pause(Duration.ofMillis(500)).build().perform();
+            if (element.isEnabled())
+                actions().moveToElement(element).click().build().perform();
         }));
-    }
 
+    }
 }

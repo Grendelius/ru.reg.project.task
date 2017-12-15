@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.$$;
 
 @Name("Yandex MainPage navigation panel")
 public class YandexMainPageNavigationPanel extends ElementsContainer {
@@ -16,6 +15,6 @@ public class YandexMainPageNavigationPanel extends ElementsContainer {
     private ElementsCollection category;
 
     public void sectionClick(String sectionName) {
-        $$(category).filter(exactText(sectionName)).first().click();
+        category.filter(exactText(sectionName)).first().click();
     }
 }

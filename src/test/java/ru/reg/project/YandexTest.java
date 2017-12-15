@@ -47,7 +47,7 @@ public class YandexTest {
         yandexMarketAdvancedSearchPage = yandexMarketResultPage.goToAllFilters();
         yandexMarketAdvancedSearchPage.setUpPrice(null, 20000);
         yandexMarketAdvancedSearchPage.setUpPhoneScreenDiagonalPrecisely(3f, null);
-//        yandexMarketAdvancedSearchPage.chooseMakers(makersList);
+        yandexMarketAdvancedSearchPage.chooseMakers(makersList);
         yandexMarketAdvancedSearchPage.clickOnShowFiltered();
         yandexMarketResultPage.getSizeOfProductsList().shouldBe(sizeGreaterThanOrEqual(10));
         yandexMarketResultPage.setLinkFromFirstInList();

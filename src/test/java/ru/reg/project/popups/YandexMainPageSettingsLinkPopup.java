@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.actions;
 
 @Name("YandexMainPage settings link popup")
@@ -18,7 +17,6 @@ public class YandexMainPageSettingsLinkPopup extends ElementsContainer {
     private ElementsCollection popupMenuItemLink;
 
     public void clickOnPopupMenuItemLink(String menuItemName) {
-        actions().moveToElement($$(popupMenuItemLink).filter(exactText(menuItemName)).first())
-                .click().build().perform();
+        actions().moveToElement(popupMenuItemLink.filter(exactText(menuItemName)).first()).click().build().perform();
     }
 }
