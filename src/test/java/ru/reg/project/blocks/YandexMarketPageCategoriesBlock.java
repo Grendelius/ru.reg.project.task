@@ -3,7 +3,6 @@ package ru.reg.project.blocks;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.ElementsContainer;
 import org.openqa.selenium.support.FindBy;
-import ru.sbtqa.tag.pagefactory.annotations.ElementTitle;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Condition.exactText;
@@ -11,7 +10,7 @@ import static com.codeborne.selenide.Condition.exactText;
 @Name("Categories block on main page of YandexMarket")
 public class YandexMarketPageCategoriesBlock extends ElementsContainer {
 
-    @ElementTitle("Categories links")
+    @Name("Categories links")
     @FindBy(xpath = ".//li/a[@class='link topmenu__link']")
     private ElementsCollection categoriesNames;
 

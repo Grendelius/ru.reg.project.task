@@ -7,7 +7,6 @@ import ru.reg.project.blocks.AdvancedSearchPageChoosingMakersBlock;
 import ru.sbtqa.tag.pagefactory.annotations.ActionTitle;
 import ru.sbtqa.tag.pagefactory.annotations.ElementTitle;
 import ru.sbtqa.tag.pagefactory.annotations.PageEntry;
-import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.*;
 
-@Name("Yandex Market Advanced search page")
+@PageEntry(title = "Yandex Market Advanced search page")
 public class YandexMarketAdvancedSearchPage {
 
     @ElementTitle("Parameters block")

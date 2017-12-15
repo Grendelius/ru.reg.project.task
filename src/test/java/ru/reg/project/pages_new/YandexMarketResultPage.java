@@ -7,12 +7,11 @@ import ru.reg.project.blocks.YandexMarketFilterBlock;
 import ru.sbtqa.tag.pagefactory.annotations.ActionTitle;
 import ru.sbtqa.tag.pagefactory.annotations.ElementTitle;
 import ru.sbtqa.tag.pagefactory.annotations.PageEntry;
-import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-@Name("Yandex Market products result page")
+@PageEntry(title = "Yandex Market products result page")
 public class YandexMarketResultPage {
     private String product_url;
 

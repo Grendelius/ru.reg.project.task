@@ -8,12 +8,11 @@ import ru.reg.project.popups.YandexMainPageSettingsLinkPopup;
 import ru.sbtqa.tag.pagefactory.annotations.ActionTitle;
 import ru.sbtqa.tag.pagefactory.annotations.ElementTitle;
 import ru.sbtqa.tag.pagefactory.annotations.PageEntry;
-import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
-@Name("Yandex main page")
+@PageEntry(title = "Yandex main page")
 public class YandexMainPage {
 
     public static final String PAGE_URL = "https://yandex.ru/";

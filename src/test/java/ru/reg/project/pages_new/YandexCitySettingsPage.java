@@ -7,11 +7,10 @@ import ru.reg.project.popups.YandexCitySettingsPagePopup;
 import ru.sbtqa.tag.pagefactory.annotations.ActionTitle;
 import ru.sbtqa.tag.pagefactory.annotations.ElementTitle;
 import ru.sbtqa.tag.pagefactory.annotations.PageEntry;
-import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Selenide.*;
 
-@Name("Yandex set city page")
+@PageEntry(title = "Yandex set city page")
 public class YandexCitySettingsPage {
 
     @ElementTitle("Input city field")

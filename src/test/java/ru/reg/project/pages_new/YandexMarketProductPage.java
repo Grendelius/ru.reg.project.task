@@ -6,11 +6,10 @@ import org.openqa.selenium.support.FindBy;
 import ru.sbtqa.tag.pagefactory.annotations.ActionTitle;
 import ru.sbtqa.tag.pagefactory.annotations.ElementTitle;
 import ru.sbtqa.tag.pagefactory.annotations.PageEntry;
-import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Selenide.$;
 
-@Name("Yandex Market product page")
+@PageEntry(title = "Yandex Market product page")
 public class YandexMarketProductPage {
 
     @ElementTitle("Name")
