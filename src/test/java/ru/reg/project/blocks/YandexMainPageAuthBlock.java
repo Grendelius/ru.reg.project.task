@@ -16,7 +16,7 @@ public class YandexMainPageAuthBlock extends ElementsContainer {
     @FindBy(xpath = ".//input[@name='passwd']")
     private SelenideElement pswField;
 
-    @Name("Ввойти")
+    @Name("Войти")
     @FindBy(xpath = ".//button[contains(@class, 'button auth__button')]")
     private SelenideElement sbmBtn;
 
