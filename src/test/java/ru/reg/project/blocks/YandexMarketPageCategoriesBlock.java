@@ -7,10 +7,10 @@ import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Condition.exactText;
 
-@Name("Categories block on main page of YandexMarket")
+@Name("Блок категорий товаров")
 public class YandexMarketPageCategoriesBlock extends ElementsContainer {
 
-    @Name("Categories links")
+    @Name("Категории")
     @FindBy(xpath = ".//li/a[@class='link topmenu__link']")
     private ElementsCollection categoriesNames;
 

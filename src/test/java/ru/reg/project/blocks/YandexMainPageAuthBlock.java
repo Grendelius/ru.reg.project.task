@@ -5,18 +5,18 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
-@Name("Yandex MainPage user's authorization block")
+@Name("Блок авторизации пользователя")
 public class YandexMainPageAuthBlock extends ElementsContainer {
 
-    @Name("User login field")
+    @Name("Поле ввода логина")
     @FindBy(xpath = ".//input[@name='login']")
     private SelenideElement loginField;
 
-    @Name("User password field")
+    @Name("Поле ввода пароля")
     @FindBy(xpath = ".//input[@name='passwd']")
     private SelenideElement pswField;
 
-    @Name("Submit button")
+    @Name("Ввойти")
     @FindBy(xpath = ".//button[contains(@class, 'button auth__button')]")
     private SelenideElement sbmBtn;
 

@@ -11,18 +11,18 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.actions;
 
-@Name("Choosing makers block")
+@Name("Блок выбора производителей")
 public class AdvancedSearchPageChoosingMakersBlock extends ElementsContainer {
 
-    @Name("Button")
+    @Name("Развернуть")
     @FindBy(xpath = ".//button")
     private SelenideElement button;
 
-    @Name("Search input field")
+    @Name("Поле поиска производителя")
     @FindBy(xpath = ".//input[@class='input__control']")
     private SelenideElement searchInputField;
 
-    @Name("Checkboxes")
+    @Name("Чекбоксы")
     @FindBy(xpath = ".//input[@class='checkbox__control']")
     private ElementsCollection checkboxes;
 

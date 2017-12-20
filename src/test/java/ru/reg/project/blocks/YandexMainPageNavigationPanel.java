@@ -7,10 +7,10 @@ import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Condition.exactText;
 
-@Name("Yandex MainPage navigation panel")
+@Name("Навигационная панель основной страницы Яндекс")
 public class YandexMainPageNavigationPanel extends ElementsContainer {
 
-    @Name("Section name")
+    @Name("Секция")
     @FindBy(xpath = ".//a")
     private ElementsCollection category;
 

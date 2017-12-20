@@ -9,10 +9,10 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.actions;
 import static java.time.Duration.ofSeconds;
 
-@Name("Block of filters parameters on the Yandex Market result page")
+@Name("Блок фильтрации")
 public class YandexMarketFilterBlock extends ElementsContainer {
 
-    @Name("Filter link")
+    @Name("Фильтр-ссылка")
     @FindBy(xpath = ".//a[contains(@class,'link link_theme_major')]")
     private ElementsCollection filterLinks;
 
