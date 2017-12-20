@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
+@Deprecated
 public class MarketPage extends Page {
     private final String PAGE_URL = "https://market.yandex.ru/";
     private SelenideElement product;

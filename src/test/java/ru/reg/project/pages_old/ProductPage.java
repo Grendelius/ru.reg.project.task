@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$x;
 
+@Deprecated
 public class ProductPage {
 
     public void ratingShow() {

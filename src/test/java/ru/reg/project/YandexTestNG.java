@@ -5,10 +5,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ru.reg.project.pages_new.YandexMarketAdvancedSearchPage;
-import ru.reg.project.pages_new.YandexMarketMainPage;
-import ru.reg.project.pages_new.YandexMarketProductPage;
-import ru.reg.project.pages_new.YandexMarketResultPage;
+import ru.reg.project.pages.YandexMarketMainPage;
+import ru.reg.project.pages.YandexMarketResultPage;
 import ru.reg.project.settngs.Browser;
 
 import java.util.ArrayList;
@@ -22,10 +20,6 @@ import static com.codeborne.selenide.Selenide.open;
 @Listeners(TextReport.class)
 
 public class YandexTestNG {
-    private YandexMarketMainPage yandexMarketMainPage;
-    private YandexMarketResultPage yandexMarketResultPage;
-    private YandexMarketAdvancedSearchPage yandexMarketAdvancedSearchPage;
-    private YandexMarketProductPage yandexMarketProductPage;
 
     @DataProvider(name = "TestData")
     public Object[][] data() {
@@ -37,22 +31,23 @@ public class YandexTestNG {
     @BeforeClass
     public void beforeClass() {
         Browser.setChrome();
-        yandexMarketMainPage = open(YandexMarketMainPage.PAGE_URL, YandexMarketMainPage.class);
+        open(YandexMarketMainPage.PAGE_URL, YandexMarketMainPage.class);
     }
 
     @Test(dataProvider = "TestData")
     public void yandexMainPageTest(List<String> makersList) {
-        yandexMarketResultPage = yandexMarketMainPage
-                .goToCategoryAndToSubCategory("Электроника", "Мобильные телефоны");
-        yandexMarketAdvancedSearchPage = yandexMarketResultPage.goToAllFilters();
-        yandexMarketAdvancedSearchPage.setUpPrice(null, 20000);
-        yandexMarketAdvancedSearchPage.setUpPhoneScreenDiagonalPrecisely(3f, null);
-        yandexMarketAdvancedSearchPage.chooseMakers(makersList);
-        yandexMarketAdvancedSearchPage.clickOnShowFiltered();
-        yandexMarketResultPage.getSizeOfProductsList().shouldBe(sizeGreaterThanOrEqual(10));
-        yandexMarketResultPage.setLinkFromFirstInList();
-        yandexMarketResultPage.sortFilterSet("По новизне");
-        yandexMarketProductPage = yandexMarketResultPage.goToFirstProduct();
-        yandexMarketProductPage.showTheProductInfo();
+        new YandexMarketMainPage()
+                .goToCategoryAndToSubCategory("Электроника", "Мобильные телефоны")
+                .goToAllFilters()
+                .setUpPrice(null, 20000)
+                .setUpPhoneScreenDiagonalPrecisely(3f, null)
+                .chooseMakers(makersList)
+                .clickOnShowFiltered()
+                .getSizeOfProductsList().shouldBe(sizeGreaterThanOrEqual(10));
+        new YandexMarketResultPage()
+                .setLinkFromFirstInList()
+                .sortFilterSet("По новизне")
+                .goToFirstProduct()
+                .showTheProductInfo();
     }
 }

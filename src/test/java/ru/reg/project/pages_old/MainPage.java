@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
+@Deprecated
 public class MainPage extends Page {
     private final String PAGE_URL = "https://yandex.ru/";
 

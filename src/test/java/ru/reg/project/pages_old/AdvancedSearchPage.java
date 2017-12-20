@@ -14,6 +14,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
+@Deprecated
 public class AdvancedSearchPage extends Page {
     private SelenideElement parameter;
 

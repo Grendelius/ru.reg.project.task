@@ -8,9 +8,8 @@ import ru.sbtqa.tag.cucumber.TagCucumber;
 @RunWith(TagCucumber.class)
 @CucumberOptions(
         monochrome = true,
-        glue = {"ru.reg.project.stepsdef"},
+        glue = {"stepsdef"},
         features = {"src/test/resources/features/"},
-        tags = {"@YmTest"}
-)
+        tags = {"@YmTest"})
 public class YandexCucumberTest {
 }

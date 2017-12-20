@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Selenide.actions;
+import static java.time.Duration.ofSeconds;
 
 @Name("Block of filters parameters on the Yandex Market result page")
 public class YandexMarketFilterBlock extends ElementsContainer {
@@ -16,6 +18,7 @@ public class YandexMarketFilterBlock extends ElementsContainer {
 
     public void clickOnFilterLink(String filterName) {
         filterLinks.filter(exactText(filterName)).first().click();
+        actions().pause(ofSeconds(2)).build().perform();
     }
 
 }
