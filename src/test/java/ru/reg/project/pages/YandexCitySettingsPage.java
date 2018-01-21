@@ -25,7 +25,7 @@ public class YandexCitySettingsPage extends Page {
     @FindBy(xpath = "//button[@type='submit']")
     private SelenideElement saveBtn;
 
-    @ElementTitle("Выплывающий список городов")
+    @ElementTitle("Выпадающий список городов")
     @FindBy(xpath = "//div[@class='popup__content']")
     private YandexCitySettingsPagePopup citiesPopup;
 
