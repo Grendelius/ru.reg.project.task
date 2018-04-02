@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.*;
 
-@PageEntry(title = "Yandex Market Advanced search page")
+@PageEntry(title = "Страница расширенного поиска на Яндекс Маркет")
 public class YandexMarketAdvancedSearchPage extends Page {
 
     @ElementTitle("Блоки с параметрами")
