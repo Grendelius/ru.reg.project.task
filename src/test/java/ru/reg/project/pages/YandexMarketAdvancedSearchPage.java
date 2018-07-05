@@ -38,7 +38,7 @@ public class YandexMarketAdvancedSearchPage extends Page {
     private SelenideElement showFilteredLink;
 
     public YandexMarketAdvancedSearchPage() {
-        page(this);
+     
     }
 
     private SelenideElement searchParameterBlock(String parameterName) {
